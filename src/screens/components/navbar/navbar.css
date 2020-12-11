@@ -1,0 +1,257 @@
+p,
+h1,
+h2,
+h3,
+h4 {
+  color: #ffff;
+  text-transform: capitalize;
+}
+p {
+  font-size: 14px;
+}
+
+.nav {
+  min-height: 70px;
+  background-color: tomato;
+  line-height: 0%;
+}
+.nav h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 3rem;
+}
+#navHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  justify-content: space-around;
+}
+#hello-section {
+  line-height: 0%;
+}
+#orders-section {
+  line-height: 0%;
+}
+
+#headerInput {
+  display: flex;
+  flex: 6;
+  height: 35px;
+  margin-left: 11px;
+  background-color: #ffff;
+  box-shadow: none;
+  border: none;
+}
+
+#navbottom {
+  height: 35px;
+  background-color: #2f4f4f;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0%;
+  position: relative;
+}
+#navbottom :nth-child(n) {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 950px) {
+  #flag {
+    display: none;
+  }
+}
+@media only screen and (max-width: 630px) {
+  #accounts {
+    display: none;
+  }
+  #locationpin {
+    display: none;
+  }
+  #logoImg {
+    height: 22px;
+  }
+  #section1 {
+    width: 15%;
+  }
+  #section2 {
+    width: 5%;
+  }
+  #inputBlock {
+    width: 80%;
+  }
+
+  #menuDrawer {
+    width: 90vw;
+  }
+}
+@media only screen and (min-width: 630px) {
+  #logoImg {
+    height: 60px;
+  }
+  #menuDrawer {
+    width: 400px;
+  }
+  #accounts {
+    display: flex;
+  }
+  #section1 {
+    width: 33%;
+  }
+  #section2 {
+    width: 33%;
+  }
+  #inputBlock {
+    width: 33%;
+  }
+}
+@media only screen and (max-width: 790px) {
+  #orders-section,
+  #hello-section {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #flag {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 1086px) {
+  #deals-responsive1 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 886px) {
+  #deals-responsive2 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #deals-responsive3 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 400px) {
+  #offer {
+    display: none;
+  }
+}
+
+#deals {
+  height: 100%;
+  flex-direction: row;
+  display: flex;
+  width: 96%;
+  justify-content: space-around;
+}
+
+#flag {
+  width: 50px;
+  height: 40px;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+}
+#accounts {
+  line-height: 0%;
+  flex-direction: row;
+
+  align-items: center;
+  position: relative;
+}
+#searchBlock {
+  width: 10%;
+  background-color: orange;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+#inputBlock {
+  border-radius: 6px;
+
+  height: 40px;
+  background-color: #ffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#offer {
+  min-width: 200px;
+  height: 100%;
+  flex-direction: row;
+  /* align-items: center;
+  display: flex;
+
+  justify-content: flex-end; */
+  padding-right: 2px;
+}
+
+#signInMenu {
+  width: 400px;
+  position: absolute;
+  height: 80vh;
+  background-color: #ffff;
+  z-index: 2;
+  top: 100%;
+  right: 2px;
+  border-top-left-radius: 5%;
+  box-shadow: 2px 2px grey;
+  animation: intro 0.7s ease-in;
+  animation-iteration-count: 1;
+}
+
+@keyframes intro {
+  from {
+    transform: translatey(-6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+#flagMenu {
+  width: 300px;
+  position: absolute;
+  height: 200px;
+  background-color: #ffff;
+  z-index: 2;
+  top: 110%;
+  right: 2px;
+  border-top-left-radius: 5%;
+  animation: intro 0.7s ease-in;
+  animation-iteration-count: 1;
+}
+
+#menuDrawer {
+  min-height: 96vh;
+  position: absolute;
+  z-index: 4;
+  top: 0px;
+  left: 0px;
+  box-shadow: 2px 2px grey;
+  background-color: #ffff;
+  animation: ease-in 0.2s mymove;
+  animation-iteration-count: 1;
+
+  @keyframes mymove {
+    from {
+      transform: translateX(-400px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+.text {
+}
