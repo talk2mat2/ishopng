@@ -5,7 +5,7 @@ import SweetButtons from "./components/SweetButtons";
 const Container = styled.div`
   min-height: 80vh;
   width: 100%;
-
+  background-color: #ffff;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -22,7 +22,7 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 6px 5px #696969;
+
   border-radius: 9px;
   position: relative;
 `;
@@ -108,6 +108,15 @@ const LoginScreen = () => {
               our Cookies Notice and our Interest-Based Ads Notice.
             </h2>
           </div>
+          <SweetButtons
+            name="Sign Up"
+            width="98%"
+            height="30px"
+            handleClick={() => {
+              return;
+            }}
+            color="grey"
+          />
         </InnerDiv>
       </Div>
     </Container>

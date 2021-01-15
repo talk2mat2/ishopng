@@ -17,6 +17,8 @@ import {
   // useParams
 
 } from "react-router-dom";
+import ProductDetail from './screens/product.detail.View';
+import ShoppingCart from './screens/Shoppikng.cart.Screeen';
 
 
 
@@ -30,12 +32,15 @@ function App() {
       < Switch>
       <Route  exact path="/">
  <React.Fragment>
- <Swipper />
+ {/* <Swipper />
  <FlashDeals/>
  <DealsSwiper/>
  <DealsSwiper/>
  <DealsSwiper/>
- <RecentlyViewed/></React.Fragment>
+ <RecentlyViewed/> */}
+ {/* <ProductDetail/> */}
+ <ShoppingCart/>
+ </React.Fragment>
  </Route>
  
  <Route path="/signin" >

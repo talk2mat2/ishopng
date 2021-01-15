@@ -39,6 +39,9 @@ const slideSWiper = {
   alignItems: "center",
   textAlign: "center",
   backgroundColor: "#Ffff",
+  display: "flex",
+
+  justifyContent: "center",
 };
 
 const Swipper = () => {

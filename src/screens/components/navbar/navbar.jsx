@@ -202,6 +202,29 @@ const Navbar = () => {
             <h3>& Orders</h3>
           </div>
           <div>
+            <div
+              style={{
+                borderRadius: "100%",
+                position: "absolute",
+                height: "16px",
+                width: "16px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#ffff",
+                top: "8px",
+              }}
+            >
+              <p
+                style={{
+                  color: "green",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                }}
+              >
+                2
+              </p>
+            </div>
             <h3>
               <ShoppingCartOutlinedIcon
                 style={{ color: " #ffff" }}
