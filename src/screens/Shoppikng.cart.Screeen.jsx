@@ -147,7 +147,10 @@ const CartPeoduct = (props) => {
             alignItems: "flex-end",
           }}
         >
-          <DeleteForeverIcon style={{ color: "grey" }} fontSize="medium" />
+          <DeleteForeverIcon
+            style={{ color: "grey", cursor: "pointer" }}
+            fontSize="medium"
+          />
           <div
             style={{
               justifySelf: "flex-end",
@@ -160,14 +163,14 @@ const CartPeoduct = (props) => {
             }}
           >
             <RemoveCircleOutlineIcon
-              style={{ color: "grey" }}
+              style={{ color: "grey", cursor: "pointer" }}
               fontSize="medium"
               onClick={handleDecrement.bind(this, "")}
             />
             <p style={{ color: "grey" }}>{itemNumber}</p>
             <ControlPointIcon
               onClick={handleIncrement.bind(this, "")}
-              style={{ color: "grey" }}
+              style={{ color: "grey", cursor: "pointer" }}
               fontSize="medium"
             />
           </div>
@@ -177,7 +180,7 @@ const CartPeoduct = (props) => {
   );
 };
 const ShoppingCart = () => {
-  const cartIsEmty = false;
+  const cartIsEmty = true;
   const Cardimg = {
     height: "50px",
   };

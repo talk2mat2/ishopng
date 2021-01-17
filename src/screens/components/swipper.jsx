@@ -55,8 +55,8 @@ const Swipper = () => {
         navigation={true}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => {}}
+        onSlideChange={() => {}}
         style={{ height: "100%" }}
       >
         <SwiperSlide style={slideSWiper}>

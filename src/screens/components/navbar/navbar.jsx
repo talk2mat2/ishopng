@@ -7,13 +7,14 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import ArrowDropDownOutlinedIcon from "@material-ui/icons/ArrowDropDownOutlined";
 import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-
+import { useHistory } from "react-router-dom";
 import "./navbar.css";
 import SingInMenuContent from "../singInmenu";
 import FlagContent from "../FlagContent";
 import styled from "styled-components";
 import Menudrawercontent from "../menudrawercontent";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Drawer = styled.div`
   animation: ease-in 0.2s mymove;
@@ -36,16 +37,17 @@ const Wrapper = styled.div`
   z-index: 2;
 `;
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [signMenuvisible, setSignMenuvisible] = useState(false);
   const [flagMenuvisible, setflagMenuvisible] = useState(false);
   const [Menuvisible, setMenuvisible] = useState(false);
   const [searchValue, setsearchValue] = useState("");
 
+  const currentUser = useSelector((state) => state.user.currentUser);
   const handlemenuvisibility = () => {
     setMenuvisible(!Menuvisible);
   };
-
+  const history = useHistory();
   return (
     <div className="nav">
       {Menuvisible && (
@@ -105,7 +107,6 @@ const Navbar = () => {
               fontSize="default"
             />
             <div id="hello-section">
-              <h4 style={{ fontWeight: "200" }}>Hello</h4>
               <h4>Select address</h4>
             </div>
           </div>
@@ -186,7 +187,8 @@ const Navbar = () => {
           >
             <div>
               <h4 id="signin" style={{ fontWeight: "200" }}>
-                Hello,sign in
+                {!currentUser && " Hello,sign in"}
+                {currentUser && `hello ${currentUser.firstName}`}
               </h4>
               <h3>Account</h3>
             </div>
@@ -227,7 +229,10 @@ const Navbar = () => {
             </div>
             <h3>
               <ShoppingCartOutlinedIcon
-                style={{ color: " #ffff" }}
+                onClick={() => {
+                  history.push("/cart");
+                }}
+                style={{ color: " #ffff", cursor: "pointer" }}
                 fontSize="large"
               />
             </h3>

@@ -66,8 +66,8 @@ const DealsSwiper = () => {
         slidesPerView={1}
         navigation={true}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => {}}
+        onSlideChange={() => {}}
         style={{ height: "80%" }}
       >
         <SwiperSlide style={slideSWiper}>

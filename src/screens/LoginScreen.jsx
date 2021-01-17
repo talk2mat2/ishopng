@@ -1,6 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SweetButtons from "./components/SweetButtons";
+import firebase from "../firebase/firebase";
+
+import {
+  Switch,
+  Route,
+  // Link,
+  // useRouteMatch,
+  // useParams
+  useLocation,
+  useHistory,
+} from "react-router-dom";
+import { PinDropSharp } from "@material-ui/icons";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -44,44 +56,134 @@ const H3 = styled.p`
   color: black;
   font-weight: bold;
 `;
+const Inpute = styled.input`
+  height: 30px;
+  width: 98%;
+  border-width: 2px;
+  border-color: ${({ borderColor }) => borderColor};
+  border-radius: 3px;
+  margin-bottom: 3rem;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px ${({ borderColor }) => borderColor};
+  }
+`;
 
-const Inpute = {
-  height: "30px",
-  width: "98%",
-  borderWidth: "1px",
-  borderColor: "silver",
-  borderRadius: "3px",
-  marginBottom: "3rem",
-};
-const LoginScreen = () => {
-  const [defaultMessage] = useState(
-    " enter your email or mobile number to contnue"
-  );
+const LoginScreen = (props) => {
   const [inputeValue, setInputeValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [borderColor, setBorderColor] = useState("silver");
+  const { match, history } = props;
+  const location = useLocation();
+
+  const HandleuserLogin = (value) => {
+    setInputeValue(value);
+    console.log(inputeValue, value);
+    firebase
+      .auth()
+      .fetchSignInMethodsForEmail(value)
+      .then((result) => {
+        if (result.length < 1) {
+          setBorderColor("red");
+        } else {
+          setBorderColor("blue");
+        }
+      })
+      .catch((error) => {
+        setBorderColor("red");
+      });
+  };
+  const signInWithEmailPassword = (email, password) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        // Signed in
+        // ...
+        console.log("loggged in success");
+        console.log(user);
+        history.push("/");
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+  };
+  const handleSignIn = () => {
+    location.pathname === "/signin" && history.push(`${match.url}/password`);
+    location.pathname === "/signin/password" &&
+      signInWithEmailPassword(inputeValue, passwordValue);
+    console.log(location);
+  };
+
   return (
     <Container>
       <Div>
         <InnerDiv>
-          <div style={{ width: "100%", height: "70px", lineHeight: "8px" }}>
-            <H3>Login In</H3>
-            <p style={{ color: "black", fontWeight: "bold", fontSize: "11px" }}>
-              {defaultMessage}
-            </p>
-          </div>
-          <input
-            type="text"
-            style={Inpute}
-            value={inputeValue}
-            onChange={(e) => {
-              setInputeValue(e.target.value);
-            }}
-          />
+          <Switch>
+            <Route exact path={match.url}>
+              <React.Fragment>
+                <div
+                  style={{ width: "100%", height: "70px", lineHeight: "8px" }}
+                >
+                  <H3>Login </H3>
+                  <p
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      fontSize: "11px",
+                    }}
+                  >
+                    enter your email or mobile number to contnue
+                  </p>
+                </div>
+                <Inpute
+                  borderColor={borderColor}
+                  type="email"
+                  value={inputeValue}
+                  onChange={(e) => {
+                    // setInputeValue(e.target.value);
+                    HandleuserLogin(e.target.value);
+                  }}
+                />
+              </React.Fragment>
+            </Route>
+            <Route exact path={`${match.url}/password`}>
+              <React.Fragment>
+                <div
+                  style={{ width: "100%", height: "70px", lineHeight: "8px" }}
+                >
+                  <H3>
+                    Enter Password<small> to finish</small>{" "}
+                  </H3>
+                  <p
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      fontSize: "11px",
+                    }}
+                  >
+                    {inputeValue}
+                  </p>
+                </div>
+                <Inpute
+                  borderColor={borderColor}
+                  type="password"
+                  value={passwordValue}
+                  onChange={(e) => {
+                    // setInputeValue(e.target.value);
+                    setPasswordValue(e.target.value);
+                  }}
+                />
+              </React.Fragment>
+            </Route>
+          </Switch>
           <SweetButtons
-            name="Sign In"
+            name="Continue"
             width="98%"
             height="30px"
             handleClick={() => {
-              return;
+              handleSignIn();
             }}
           />
           <div
@@ -112,9 +214,7 @@ const LoginScreen = () => {
             name="Sign Up"
             width="98%"
             height="30px"
-            handleClick={() => {
-              return;
-            }}
+            handleClick={() => {}}
             color="grey"
           />
         </InnerDiv>

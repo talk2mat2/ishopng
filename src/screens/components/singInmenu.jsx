@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import SweetButtons from "./SweetButtons";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Firebase from "../../firebase/firebase";
 const P = styled.p`
   color: grey;
   padding: 3px;
@@ -18,9 +21,11 @@ const H3 = styled.h3`
 `;
 
 const SingInMenuContent = () => {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const history = useHistory();
   const handleSighin = () => {
-    history.push("/signin");
+    !currentUser && history.push("/signin");
+    currentUser && Firebase.auth().signOut();
   };
   return (
     <div
@@ -34,11 +39,20 @@ const SingInMenuContent = () => {
       }}
     >
       <div>
-        <SweetButtons name="Sign In" height="2rem" handleClick={handleSighin} />
+        <SweetButtons
+          name={currentUser ? "log out" : "Sign In"}
+          height="2rem"
+          handleClick={handleSighin}
+        />
       </div>
-      <P style={{ color: "grey", fontSize: 13 }}>
-        dont have accounts yet, sign in here
-      </P>
+      {!currentUser && (
+        <P style={{ color: "grey", fontSize: 13 }}>
+          dont have accounts yet, <Link to="/signup">sign up here</Link>
+        </P>
+      )}
+      {currentUser && (
+        <P style={{ color: "grey", fontSize: 13 }}>{currentUser.email}</P>
+      )}
       <div
         style={{ height: "1px", width: "90%", backgroundColor: "silver" }}
       ></div>

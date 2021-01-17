@@ -8,7 +8,7 @@ import ShopIcon from "@material-ui/icons/Shop";
 const Container = styled.div`
   min-height: 80vh;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 3px;
 
   display: flex;
   align-items: center;
@@ -22,6 +22,7 @@ const Section = styled.section`
   width: 100%;
   background-color: #ffff;
   min-height: 400px;
+  padding: 10px;
 `;
 const Description = styled.div`
   width: 600px;

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SweetButtons from "./SweetButtons";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const P = styled.p`
   color: grey;
@@ -64,7 +65,7 @@ export default function Menudrawercontent(props) {
         <SweetButtons name="Sign In" height="2rem" handleClick={handleSighin} />
       </div>
       <P style={{ color: "grey", fontSize: 13 }}>
-        dont have accounts yet, sign in here
+        dont have accounts yet, <Link to="/signup">sign up here</Link>
       </P>
       <div
         style={{ height: "1px", width: "90%", backgroundColor: "silver" }}
