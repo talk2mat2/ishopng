@@ -194,7 +194,7 @@ const Navbar = (props) => {
             </div>
             {signMenuvisible && (
               <div id="signInMenu">
-                <SingInMenuContent />
+                <SingInMenuContent handlemenuvisibility={setSignMenuvisible} />
               </div>
             )}
             <ArrowDropDownOutlinedIcon style={{ color: "#ffff" }} />

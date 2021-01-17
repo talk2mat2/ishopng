@@ -20,12 +20,13 @@ const H3 = styled.h3`
   padding-bottom: 10px;
 `;
 
-const SingInMenuContent = () => {
+const SingInMenuContent = (props) => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const history = useHistory();
   const handleSighin = () => {
     !currentUser && history.push("/signin");
     currentUser && Firebase.auth().signOut();
+    props.handlemenuvisibility();
   };
   return (
     <div
@@ -47,7 +48,15 @@ const SingInMenuContent = () => {
       </div>
       {!currentUser && (
         <P style={{ color: "grey", fontSize: 13 }}>
-          dont have accounts yet, <Link to="/signup">sign up here</Link>
+          dont have accounts yet,{" "}
+          <Link
+            to="/signup"
+            onClick={() => {
+              props.handlemenuvisibility();
+            }}
+          >
+            sign up here
+          </Link>
         </P>
       )}
       {currentUser && (
@@ -74,9 +83,9 @@ const SingInMenuContent = () => {
           <P>Your Gift Card Balance</P>
           <P>Your Pets</P>
           <P>Memberships & Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Memberships & Subscriptions</P>
         </div>
         <div
@@ -92,15 +101,15 @@ const SingInMenuContent = () => {
           <P>Your Gift Card Balance</P>
           <P>Your Pets</P>
           <P>Memberships & Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Memberships & Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
         </div>
       </div>

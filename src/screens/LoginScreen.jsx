@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SweetButtons from "./components/SweetButtons";
 import firebase from "../firebase/firebase";
-
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+import Button from "@material-ui/core/Button";
 import {
   Switch,
   Route,
@@ -10,10 +16,11 @@ import {
   // useRouteMatch,
   // useParams
   useLocation,
-  useHistory,
 } from "react-router-dom";
-import { PinDropSharp } from "@material-ui/icons";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 const Container = styled.div`
   min-height: 80vh;
   width: 100%;
@@ -25,7 +32,7 @@ const Container = styled.div`
 `;
 const Div = styled.div`
   margin-top: 30px;
-  height: 350px;
+  min-height: 350px;
   max-width: 300px;
   background-color: #ffff;
   border: 0.5px solid rgba(192, 192, 192, 0.795);
@@ -70,7 +77,9 @@ const Inpute = styled.input`
 `;
 
 const LoginScreen = (props) => {
+  const [open, setOpen] = React.useState(false);
   const [inputeValue, setInputeValue] = useState("");
+  const [isError, setError] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [borderColor, setBorderColor] = useState("silver");
   const { match, history } = props;
@@ -85,12 +94,15 @@ const LoginScreen = (props) => {
       .then((result) => {
         if (result.length < 1) {
           setBorderColor("red");
+          setError(true);
         } else {
           setBorderColor("blue");
+          setError(false);
         }
       })
       .catch((error) => {
         setBorderColor("red");
+        setError(true);
       });
   };
   const signInWithEmailPassword = (email, password) => {
@@ -105,12 +117,21 @@ const LoginScreen = (props) => {
         history.push("/");
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
       });
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleSignIn = () => {
-    location.pathname === "/signin" && history.push(`${match.url}/password`);
+    if (!inputeValue) {
+      return setOpen(true);
+    }
+    location.pathname === "/signin" &&
+      !isError &&
+      history.push(`${match.url}/password`);
     location.pathname === "/signin/password" &&
       signInWithEmailPassword(inputeValue, passwordValue);
     console.log(location);
@@ -178,6 +199,28 @@ const LoginScreen = (props) => {
               </React.Fragment>
             </Route>
           </Switch>
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">
+              {"Use Google's location service?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                field can not be empty
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Ok
+              </Button>
+            </DialogActions>
+          </Dialog>
           <SweetButtons
             name="Continue"
             width="98%"

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import SweetButtons from "./SweetButtons";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Firebase from "../../firebase/firebase";
 
 const P = styled.p`
   color: grey;
@@ -45,10 +47,12 @@ const Dealsresponsive3 = styled.p`
 `;
 
 export default function Menudrawercontent(props) {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const history = useHistory();
   const handleSighin = () => {
-    history.push("/signin");
     props.handlemenuvisibility();
+    !currentUser && history.push("/signin");
+    currentUser && Firebase.auth().signOut();
   };
   return (
     <div
@@ -62,11 +66,28 @@ export default function Menudrawercontent(props) {
       }}
     >
       <div>
-        <SweetButtons name="Sign In" height="2rem" handleClick={handleSighin} />
+        <SweetButtons
+          name={currentUser ? "log out" : "Sign In"}
+          height="2rem"
+          handleClick={handleSighin}
+        />
       </div>
-      <P style={{ color: "grey", fontSize: 13 }}>
-        dont have accounts yet, <Link to="/signup">sign up here</Link>
-      </P>
+      {!currentUser && (
+        <P style={{ color: "grey", fontSize: 13 }}>
+          dont have accounts yet,{" "}
+          <Link
+            onClick={() => {
+              props.handlemenuvisibility();
+            }}
+            to="/signup"
+          >
+            sign up here
+          </Link>
+        </P>
+      )}
+      {currentUser && (
+        <P style={{ color: "grey", fontSize: 13 }}>{currentUser.email}</P>
+      )}
       <div
         style={{ height: "1px", width: "90%", backgroundColor: "silver" }}
       ></div>
@@ -88,9 +109,9 @@ export default function Menudrawercontent(props) {
           <P>Your Gift Card Balance</P>
           <P>Your Pets</P>
           <P>Memberships & Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Memberships & Subscriptions</P>
           <H3> Deals</H3>
           <Dealsresponsive3>last Minute</Dealsresponsive3>
@@ -119,15 +140,15 @@ export default function Menudrawercontent(props) {
           <P>Your Gift Card Balance</P>
           <P>Your Pets</P>
           <P>Memberships & Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Memberships & Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
-          <P>Your Kindle Unlimited</P>
+          <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
         </div>
       </div>
