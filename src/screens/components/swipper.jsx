@@ -50,7 +50,7 @@ const Swipper = () => {
       <Swiper
         autoplay={true}
         loop={true}
-        spaceBetween={50}
+        spaceBetween={100}
         slidesPerView={1}
         navigation={true}
         pagination={{ clickable: true }}

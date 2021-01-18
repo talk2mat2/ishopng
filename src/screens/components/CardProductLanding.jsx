@@ -7,7 +7,7 @@ const Div = styled.div`
   height: 300px;
   background-color: #ffff;
   cursor: pointer;
-  margin: 2px;
+  margin: 1px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +16,10 @@ const Div = styled.div`
   position: relative;
 
   @media (max-width: 768px) {
-    width: 150px;
-    height: 200px;
+    // width: 200px;
+    // height: 250px;
+    width: 180px;
+    height: 220px;
   }
 `;
 const H3 = styled.p`
@@ -41,29 +43,28 @@ const ImgDiv = styled.div`
 `;
 const P = styled.p`
   color: grey;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 0.3px;
+  font-weight: 600;
 `;
 
 export const CardProductLanding = (props) => {
   const { onClick } = props;
   return (
-    <Link to="/item_Detail">
-      <Div>
-        <ImgDiv>
-          <img
-            src={props.imagesrc}
-            style={{
-              width: "100%",
-              borderRadius: 10,
-            }}
-            alt="img"
-          />
-        </ImgDiv>
-        <P>{props.description}</P>
-        <P>{props.price}</P>
-      </Div>
-    </Link>
+    <Div onClick={onClick}>
+      <ImgDiv>
+        <img
+          src={props.imagesrc}
+          style={{
+            width: "100%",
+            borderRadius: 10,
+          }}
+          alt="img"
+        />
+      </ImgDiv>
+      <P>{props.description}</P>
+      <P>{props.price}</P>
+    </Div>
   );
 };
 

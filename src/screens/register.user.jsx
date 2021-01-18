@@ -55,7 +55,11 @@ const H3 = styled.p`
   font-weight: bold;
 `;
 const Inpute = styled.input`
-  padding: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  padding: 2px;
   height: 30px;
   width: 98%;
   border-width: 2px;

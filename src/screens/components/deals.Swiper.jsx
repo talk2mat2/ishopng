@@ -107,21 +107,25 @@ const DealsSwiper = (props) => {
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt3.jpg"
             description="mens heavy wear"
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt3.jpg"
             description="mens heavy wear"
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt4.jpg"
             description="mens heavy wear"
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt4.jpg"
             description="mens heavy wear"
             price="=N=20.90"
@@ -134,6 +138,7 @@ const DealsSwiper = (props) => {
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt4.jpg"
             description="mens heavy wear"
             price="=N=20.90"
@@ -144,6 +149,7 @@ const DealsSwiper = (props) => {
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt3.jpg"
             description="mens heavy wear"
             price="=N=20.90"
@@ -151,28 +157,37 @@ const DealsSwiper = (props) => {
         </SwiperSlide>
         <SwiperSlide style={slideSWiper}>
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt4.jpg"
             description="mens heavy wear"
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt3.jpg"
             description="mens heavy wear"
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt3.jpg"
             description="mens heavy wear"
           />
-          <CardProductLanding imagesrc="/shirt4.jpg" price="=N=20.90" />
+          <CardProductLanding
+            onClick={handleClick.bind(this, "")}
+            imagesrc="/shirt4.jpg"
+            price="=N=20.90"
+          />
         </SwiperSlide>
         <SwiperSlide style={slideSWiper}>
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt3.jpg"
             description="mens heavy wear"
             price="=N=20.90"
           />
           <CardProductLanding
+            onClick={handleClick.bind(this, "")}
             imagesrc="/shirt4.jpg"
             description="mens heavy wear"
             price="=N=20.90"

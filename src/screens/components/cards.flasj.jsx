@@ -5,14 +5,20 @@ const Div = styled.div`
   width: 290px;
   height: 400px;
   background-color: #ffff;
-  box-shadow: 2px 3px grey;
+  // box-shadow: 2px 3px grey;
   margin: 9px;
   display: flex;
+  padding: 4px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 220px;
+    margin: 6px;
+  }
 `;
 const H3 = styled.p`
   color: black;
@@ -23,9 +29,13 @@ const H3 = styled.p`
   top: 0;
   z-index: 1;
 `;
+const HeaderText2 = styled.h1`
+  color: grey;
+  font-size: 15px;
+`;
 const ImgDiv = styled.div`
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
 
   position: relative;
   display: flex;
@@ -41,7 +51,7 @@ const P = styled.p`
 const Cardsflash = (props) => {
   return (
     <Div>
-      <H3>{props.header}</H3>
+      <HeaderText2>{props.header}</HeaderText2>
       <ImgDiv>
         <img
           src={props.imagesrc}

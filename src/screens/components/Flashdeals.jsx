@@ -20,7 +20,7 @@ const FlashDeals = () => {
       <Cardsflash
         description=" see deatils"
         header="last minute to christmas deals"
-        imagesrc="./samsung.jpg"
+        imagesrc="./shirt3.jpg"
       />
       <Cardsflash
         description=" see deatils"
@@ -30,7 +30,7 @@ const FlashDeals = () => {
       <Cardsflash
         description=" see deatils"
         header="last minute to christmas deals"
-        imagesrc="./samsung.jpg"
+        imagesrc="./shirt4.jpg"
       />
       <Cardsflash
         description=" see deatils"

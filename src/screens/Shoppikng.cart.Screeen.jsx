@@ -14,6 +14,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 1px;
   justify-content: center;
   align-items: flex-start;
@@ -28,6 +29,9 @@ const Header = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
+  @media (max-width: 768px) {
+    width: 95vw;
+  }
 }
 `;
 const PaymentChanels = styled.div`
@@ -38,6 +42,9 @@ const PaymentChanels = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
+  @media (max-width: 768px) {
+    width: 95vw;
+  }
 `;
 const EmptyCart = styled.div`
   min-height: 80vh;
@@ -61,11 +68,16 @@ const Summery = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 95vw;
+  }
 `;
 const CartSection = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  @media (min-width: 768px) {
+    margin-right: 20px;
+  }
 `;
 const HeaderText = styled.h1`
   color: grey;
@@ -89,6 +101,9 @@ const ProductContainer = styled.div`
   justify-content: center;
   display: flex;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    width: 95vw;
+  }
 `;
 const Productsection = styled.div`
   min-height: 80%;
@@ -113,7 +128,8 @@ const SummeryItems = styled.div`
 const Cards = styled.div`
   display: flex;
   flex-direction: row;
-  max-width: 40%;
+  max-width: 100%;
+  flex-wrap: wrap;
 `;
 const CartPeoduct = (props) => {
   const [itemNumber, setItemNumber] = useState(0);
@@ -143,13 +159,15 @@ const CartPeoduct = (props) => {
           style={{
             display: "flex",
             flexDirection: "column",
-
-            alignItems: "flex-end",
+            height: "100px",
+            width: "20%",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <DeleteForeverIcon
             style={{ color: "grey", cursor: "pointer" }}
-            fontSize="medium"
+            fontSize="large"
           />
           <div
             style={{
@@ -180,7 +198,7 @@ const CartPeoduct = (props) => {
   );
 };
 const ShoppingCart = () => {
-  const cartIsEmty = true;
+  const cartIsEmty = false;
   const Cardimg = {
     height: "50px",
   };
@@ -214,7 +232,9 @@ const ShoppingCart = () => {
                 <img src="/Mastercard.png" alt="quickteller" style={Cardimg} />
               </Cards>
             </PaymentChanels>
-            <MoreToLove />
+            {/* <div style={{ width: " 800px" }}>
+              <MoreToLove />
+            </div> */}
           </CartSection>
           <Summery>
             <HeaderText>Order Summary</HeaderText>

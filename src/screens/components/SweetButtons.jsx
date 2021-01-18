@@ -12,10 +12,16 @@ const SweetButton = styled.button`
   width: ${(props) => props.width || "17rem"};
   border-radius: 4px;
   margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: ${(props) => props.fontSize || null};
 `;
 const SweetButtons = (props) => {
   return (
     <SweetButton
+      fontSize={props.fontSize}
       color={props.color}
       width={props.width}
       height={props.height}

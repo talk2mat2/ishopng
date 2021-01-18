@@ -4,6 +4,7 @@ import Ratings from "./components/ratings";
 import SweetButtons from "./components/SweetButtons";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ShopIcon from "@material-ui/icons/Shop";
+import MoreToLove from "./components/MoreToLove";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -11,24 +12,31 @@ const Container = styled.div`
   padding-top: 3px;
 
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+
   margin-bottom: 1px;
 `;
 
 const Section = styled.section`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
   background-color: #ffff;
   min-height: 400px;
   padding: 10px;
+  justify-content: space-between;
 `;
 const Description = styled.div`
-  width: 600px;
+  width: 400px;
+  padding: 4px;
   min-height: 500px;
   pading: 6px;
   background-color: #ffff;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const HeaderText = styled.h1`
   color: grey;
@@ -58,6 +66,22 @@ const ProductAction = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const ProductActionMobile = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 1px;
+    display: flex;
+    height: 90px;
+    flex-direction: row;
+    z-index: 2;
+    width: 98%;
+    background-color: #ffff;
+  }
 `;
 
 const ImageDetail = {
@@ -149,7 +173,33 @@ const ProductDetail = () => {
             />
           </SweetButtons>
         </ProductAction>
+
+        <ProductActionMobile>
+          <SweetButtons
+            width="48%"
+            height="50px"
+            name="Buy Now"
+            fontSize="17px"
+          >
+            <ShopIcon
+              style={{ color: "#2f4f4f", position: "absolute", left: 10 }}
+              fontSize="large"
+            />
+          </SweetButtons>
+          <SweetButtons
+            width="48%"
+            height="50px"
+            name="Add To Cart"
+            fontSize="17px"
+          >
+            <AddShoppingCartIcon
+              style={{ color: "#2f4f4f", position: "absolute", left: 10 }}
+              fontSize="large"
+            />
+          </SweetButtons>
+        </ProductActionMobile>
       </Section>
+      <MoreToLove />
     </Container>
   );
 };

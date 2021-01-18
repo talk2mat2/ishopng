@@ -23,10 +23,19 @@ import {
 import ProductDetail from './screens/product.detail.View';
 import ShoppingCart from './screens/Shoppikng.cart.Screeen';
 import RegisterUser from './screens/register.user';
+import ScrollToTop from './ScrollToTop';
+import CoinsDeals from './screens/components/coins';
+import styled from "styled-components"
 
+const CoinsSection=styled.div`
+@media (min-width: 768px) {
+  display:none;
+}
+`
 
 function Landing(){
   return(  <React.Fragment>
+  <CoinsSection><CoinsDeals/></CoinsSection>
   <Swipper />
   <FlashDeals/>
   <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this "/>
@@ -80,6 +89,7 @@ CheckAuth()
 
   return (
     <Router>
+  <ScrollToTop>
     <div className="App">
  
       <Navbar  />
@@ -102,6 +112,7 @@ CheckAuth()
  </Switch>
  <NiceFooter/> 
     </div>
+    </ScrollToTop>
     </Router>
   );
 }
