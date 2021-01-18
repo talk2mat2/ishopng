@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 const Div = styled.div`
   width: 250px;
   height: 300px;
-  background-color: grey;
+  background-color: white;
   cursor: pointer;
-  margin: 1px;
+  margin: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,7 @@ const H3 = styled.p`
 `;
 const ImgDiv = styled.div`
   height: 80%;
-  width: 80%;
+  width: 90%;
 
   position: relative;
   display: flex;
