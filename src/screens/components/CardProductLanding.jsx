@@ -1,18 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Div = styled.div`
-  width: 100px;
-  height: 150px;
+  width: 250px;
+  height: 300px;
   background-color: #ffff;
-
-  margin: 9px;
+  cursor: pointer;
+  margin: 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   position: relative;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 200px;
+  }
 `;
 const H3 = styled.p`
   color: black;
@@ -39,23 +45,26 @@ const P = styled.p`
   margin-bottom: 0.3px;
 `;
 
-export const CardProduct = (props) => {
+export const CardProductLanding = (props) => {
+  const { onClick } = props;
   return (
-    <Div>
-      <ImgDiv>
-        <img
-          src={props.imagesrc}
-          style={{
-            width: "100%",
-            borderRadius: 10,
-          }}
-          alt="img"
-        />
-      </ImgDiv>
-      <P>{props.description}</P>
-      <P>{props.price}</P>
-    </Div>
+    <Link to="/item_Detail">
+      <Div>
+        <ImgDiv>
+          <img
+            src={props.imagesrc}
+            style={{
+              width: "100%",
+              borderRadius: 10,
+            }}
+            alt="img"
+          />
+        </ImgDiv>
+        <P>{props.description}</P>
+        <P>{props.price}</P>
+      </Div>
+    </Link>
   );
 };
 
-export default CardProduct;
+export default CardProductLanding;

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import CardProductLanding from "./CardProductLanding";
+import { useHistory } from "react-router-dom";
 // // Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -25,11 +27,27 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
+// const Div = styled.div`
+//   background-color: #fffaf0;
+//   height: 310px;
+//   padding: 2px;
+//   margin-top: 15px;
+// `;
+
+// const slideSWiper = {
+//   width: "100%",
+//   alignItems: "center",
+//   textAlign: "center",
+//   backgroundColor: "#Ffff",
+// };
 const Div = styled.div`
-  background-color: #fffaf0;
-  height: 310px;
-  padding: 2px;
-  margin-top: 15px;
+  min-height: 250px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #ffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 `;
 
 const slideSWiper = {
@@ -37,6 +55,10 @@ const slideSWiper = {
   alignItems: "center",
   textAlign: "center",
   backgroundColor: "#Ffff",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "center",
 };
 
 const TopText = styled.div`
@@ -44,11 +66,18 @@ const TopText = styled.div`
   display: flex;
 `;
 
-const DealsSwiper = () => {
+const DealsSwiper = (props) => {
+  const { dealname, dealDescription } = props;
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/item_Detail");
+  };
   return (
     <Div>
       <TopText>
-        <p style={{ color: "black" }}>FlashDeals- Discover more this summer</p>
+        <p style={{ color: "black" }}>
+          {dealname}- {dealDescription}
+        </p>
         <p
           style={{
             marginLeft: "8px",
@@ -66,44 +95,87 @@ const DealsSwiper = () => {
         slidesPerView={1}
         navigation={true}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => {}}
-        onSlideChange={() => {}}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log("slide change")}
         style={{ height: "80%" }}
       >
         <SwiperSlide style={slideSWiper}>
-          <img
-            src="./iphone12.jpg"
-            style={{
-              height: "100%",
-            }}
-            alt="img"
+          <CardProductLanding
+            onClick={handleClick.bind(this, "")}
+            imagesrc="/shirt2.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt4.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt4.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
           />
         </SwiperSlide>
         <SwiperSlide style={slideSWiper}>
-          <img
-            src="./samsung.jpg"
-            style={{
-              height: "100%",
-            }}
-            alt="img"
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt4.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt4.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
           />
         </SwiperSlide>
         <SwiperSlide style={slideSWiper}>
-          <img
-            src="./fridge.jpg"
-            style={{
-              height: "100%",
-            }}
-            alt="img"
+          <CardProductLanding
+            imagesrc="/shirt4.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
           />
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+          />
+          <CardProductLanding imagesrc="/shirt4.jpg" price="=N=20.90" />
         </SwiperSlide>
         <SwiperSlide style={slideSWiper}>
-          <img
-            src="./hp.jpg"
-            style={{
-              height: "100%",
-            }}
-            alt="img"
+          <CardProductLanding
+            imagesrc="/shirt3.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
+          />
+          <CardProductLanding
+            imagesrc="/shirt4.jpg"
+            description="mens heavy wear"
+            price="=N=20.90"
           />
         </SwiperSlide>
       </Swiper>

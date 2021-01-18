@@ -29,6 +29,11 @@ const Drawer = styled.div`
     }
   }
 `;
+const Input = styled.input`
+  &:focus {
+    outline: none;
+  }
+`;
 const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
@@ -55,21 +60,21 @@ const Navbar = (props) => {
           <div
             style={{
               position: "absolute",
-              right: "9px",
-              top: "2px",
+              right: "1px",
+              top: "1px",
               borderColor: "grey",
               borderRadius: "100%",
               borderWidth: "4px",
               cursor: " pointer",
-              width: "60px",
-              height: "60px",
+              width: "30px",
+              height: "30px",
               justifyContent: "center",
-              alignItems: "cwenter",
+              alignItems: "center",
               display: "flex",
             }}
             onClick={handlemenuvisibility.bind(this, "")}
           >
-            <p style={{ fontSize: "30px", color: "grey" }}>x</p>
+            <p style={{ fontSize: "20px", color: "grey" }}>x</p>
           </div>
           <Menudrawercontent handlemenuvisibility={handlemenuvisibility} />
         </Drawer>
@@ -112,7 +117,7 @@ const Navbar = (props) => {
           </div>
         </section>
         <section id="inputBlock">
-          <input
+          <Input
             type="text"
             id="headerInput"
             value={searchValue}

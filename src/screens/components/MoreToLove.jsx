@@ -27,8 +27,8 @@ import CardProduct from "./CardProduct";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 const Div = styled.div`
-  height: 250px;
-  width: 800px;
+  min-height: 250px;
+  width: 100%;
   border-radius: 10px;
   background-color: #ffff;
   padding: 10px;
@@ -43,6 +43,7 @@ const slideSWiper = {
   backgroundColor: "#Ffff",
   display: "flex",
   flexDirection: "row",
+  flexWrap: "wrap",
   justifyContent: "center",
 };
 
@@ -75,13 +76,14 @@ const MoreToLove = () => {
 
       <Swiper
         loop={true}
+        autoplay={true}
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
-        style={{ height: "80%" }}
+        onSwiper={(swiper) => {}}
+        onSlideChange={() => {}}
+        style={{ height: "90%" }}
       >
         <SwiperSlide style={slideSWiper}>
           <CardProduct

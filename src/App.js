@@ -29,9 +29,9 @@ function Landing(){
   return(  <React.Fragment>
   <Swipper />
   <FlashDeals/>
-  <DealsSwiper/>
-  <DealsSwiper/>
-  <DealsSwiper/>
+  <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this "/>
+  <DealsSwiper dealname="Top Deals" dealDescription="you will love these"/>
+  <DealsSwiper dealname="Featured Products" dealDescription="from recomendations"/>
   <RecentlyViewed/> 
  
  
