@@ -179,7 +179,7 @@ const Navbar = (props) => {
                 <FlagContent />
               </div>
             )}
-            <ArrowDropDownOutlinedIcon style={{ color: "#ffff" }} />
+            <ArrowDropDownOutlinedIcon style={{ color: "white" }} />
           </div>
           <div
             onMouseEnter={() => {
@@ -202,7 +202,7 @@ const Navbar = (props) => {
                 <SingInMenuContent handlemenuvisibility={setSignMenuvisible} />
               </div>
             )}
-            <ArrowDropDownOutlinedIcon style={{ color: "#ffff" }} />
+            <ArrowDropDownOutlinedIcon style={{ color: "white" }} />
           </div>
           <div id="orders-section">
             <h3>returns</h3>
@@ -218,7 +218,7 @@ const Navbar = (props) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#ffff",
+                backgroundColor: "white",
                 top: "8px",
               }}
             >
@@ -237,7 +237,7 @@ const Navbar = (props) => {
                 onClick={() => {
                   history.push("/cart");
                 }}
-                style={{ color: " #ffff", cursor: "pointer" }}
+                style={{ color: " white", cursor: "pointer" }}
                 fontSize="large"
               />
             </h3>

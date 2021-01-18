@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Div = styled.div`
   width: 290px;
   height: 400px;
-  background-color: #ffff;
+  background-color: white;
   // box-shadow: 2px 3px grey;
   margin: 9px;
   display: flex;

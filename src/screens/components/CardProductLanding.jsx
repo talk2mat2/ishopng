@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Div = styled.div`
   width: 250px;
   height: 300px;
-  background-color: #ffff;
+  background-color: grey;
   cursor: pointer;
   margin: 1px;
   display: flex;

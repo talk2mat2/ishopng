@@ -29,7 +29,7 @@ const Container = styled.div`
   min-height: 100px;
   overflow-x: auto;
 
-  background-color: #ffff;
+  background-color: white;
 `;
 const CircleItem = styled.div`
   height: 50px;
@@ -45,7 +45,7 @@ const CoinsCard = (props) => {
   return (
     <CoinsContainer>
       <CircleItem Color={Color}>
-        <Icon fontSize="large" style={{ color: "#ffff" }} />
+        <Icon fontSize="large" style={{ color: "white" }} />
       </CircleItem>
       <MediumText>{Name}</MediumText>
     </CoinsContainer>
