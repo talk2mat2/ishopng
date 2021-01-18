@@ -25,7 +25,7 @@ const Header = styled.div`
   height: 100px;
   width: 800px;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: white;
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -38,7 +38,7 @@ const PaymentChanels = styled.div`
   height: 180px;
   width: 800px;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: white;
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -50,7 +50,7 @@ const EmptyCart = styled.div`
   min-height: 80vh;
   width: 98%;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: white;
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -63,7 +63,7 @@ const Summery = styled.div`
   height: 300px;
   width: 400px;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,7 +96,7 @@ const ProductContainer = styled.div`
   min-height: 150px;
   width: 800px;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: white;
   flex-direction: column;
   justify-content: center;
   display: flex;

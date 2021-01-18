@@ -1,6 +1,6 @@
 
 import './App.css';
-import React, {useEffect,useState}from 'react';
+import React, {useEffect}from 'react';
 import Navbar from './screens/components/navbar/navbar';
 import Swipper from './screens/components/swipper';
 import FlashDeals from './screens/components/Flashdeals';
@@ -59,7 +59,7 @@ const CheckAuth=()=>{
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      var uid = user.uid;
+      // var uid = user.uid;
       // ...
       console.log(user.uid)
     //   Firebase.firestore().collection("users").get().then((querySnapshot) => {

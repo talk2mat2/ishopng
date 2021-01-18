@@ -55,7 +55,7 @@ const NiceFooter = () => {
         <p style={{ color: "#FFFF" }}>Martins.c</p>
         <p style={{ color: "#FFFF" }}>Terms and Condition</p>
         <p style={{ color: "#FFFF" }}>2020 IShop.ng</p>
-        <p style={{ color: "#FFFF" }}>all right reserved</p>
+
         <p style={{ color: "#FFFF" }}>Privacy Policy</p>
       </FooterContainer>
     </Div>

@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const Div = styled.div`
   width: 250px;
   height: 300px;
   background-color: white;
   cursor: pointer;
-  margin: 3px;
+  margin: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;

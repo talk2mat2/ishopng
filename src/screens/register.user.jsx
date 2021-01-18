@@ -3,14 +3,14 @@ import styled from "styled-components";
 import SweetButtons from "./components/SweetButtons";
 import firebase from "../firebase/firebase";
 import {
-  Switch,
-  Route,
+  // Switch,
+  // Route,
   // Link,
   // useRouteMatch,
   // useParams
   useLocation,
 } from "react-router-dom";
-import { PinDropSharp } from "@material-ui/icons";
+// import { PinDropSharp } from "@material-ui/icons";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -73,7 +73,7 @@ const Inpute = styled.input`
 `;
 
 const RegisterUser = (props) => {
-  const [borderColor, setBorderColor] = useState("silver");
+  // const [borderColor, setBorderColor] = useState("silver");
   const [form, setForm] = useState({
     email: "",
     emailBorderColor: "silver",
@@ -86,8 +86,8 @@ const RegisterUser = (props) => {
     lastName: "",
     lastNameBorderColor: "silver",
   });
-  const { match, history } = props;
-  const location = useLocation();
+  // const { match, history } = props;
+  // const location = useLocation();
 
   // const signInWithEmailPassword = (email, password) => {
   //   firebase
@@ -200,8 +200,8 @@ const RegisterUser = (props) => {
           });
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
         console.log(error);
         // ..
       });

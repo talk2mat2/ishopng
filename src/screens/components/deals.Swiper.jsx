@@ -44,7 +44,7 @@ const Div = styled.div`
   min-height: 250px;
   width: 100%;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: white;
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -54,7 +54,7 @@ const slideSWiper = {
   width: "100%",
   alignItems: "center",
   textAlign: "center",
-  backgroundColor: "#Ffff",
+  backgroundColor: "white",
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
@@ -95,8 +95,8 @@ const DealsSwiper = (props) => {
         slidesPerView={1}
         navigation={true}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => {}}
+        onSlideChange={() => {}}
         style={{ height: "80%" }}
       >
         <SwiperSlide style={slideSWiper}>

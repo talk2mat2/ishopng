@@ -11,7 +11,7 @@ const Div = styled.div`
   padding: 4px;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-radius: 8px;
   position: relative;
   @media (max-width: 768px) {

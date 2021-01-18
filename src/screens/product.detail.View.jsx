@@ -23,9 +23,9 @@ const Section = styled.section`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  background-color: #ffff;
+  background-color: white;
   min-height: 400px;
-  padding: 10px;
+
   justify-content: space-between;
 `;
 const Description = styled.div`
@@ -33,7 +33,7 @@ const Description = styled.div`
   padding: 4px;
   min-height: 500px;
   pading: 6px;
-  background-color: #ffff;
+  background-color: white;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -58,7 +58,7 @@ const Inline = styled.div`
   align-items: baseline;
 `;
 const ProductAction = styled.div`
-  background-color: #ffff;
+  background-color: white;
   border: 1px solid silver;
   width: 300px;
   border-radius: 9px;
@@ -80,13 +80,18 @@ const ProductActionMobile = styled.div`
     flex-direction: row;
     z-index: 2;
     width: 98%;
-    background-color: #ffff;
+    background-color: white;
   }
 `;
 
-const ImageDetail = {
-  height: "400px",
-};
+const ImageDetail = styled.img`
+  height: 400px;
+  @media (max-width: 768px) {
+    // width: 200px;
+    // height: 250px;
+    height: 350px;
+  } ;
+`;
 const ProductDetail = () => {
   return (
     <Container>
@@ -94,7 +99,7 @@ const ProductDetail = () => {
 
       <Section>
         <div>
-          <img src="/shirt.jpg" style={ImageDetail} alt="pic" />
+          <ImageDetail src="/shirt.jpg" alt="pic" />
         </div>
         <Description>
           <HeaderText>Mens Mopi Shirts</HeaderText>
