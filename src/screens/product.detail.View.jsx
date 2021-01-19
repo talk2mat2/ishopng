@@ -5,6 +5,7 @@ import SweetButtons from "./components/SweetButtons";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ShopIcon from "@material-ui/icons/Shop";
 import MoreToLove from "./components/MoreToLove";
+import CustomersReview from "./components/CustomerRatings";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -25,8 +26,12 @@ const Section = styled.section`
   width: 100%;
   background-color: white;
   min-height: 400px;
+  align-items: center;
 
   justify-content: space-between;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 const Description = styled.div`
   width: 400px;
@@ -204,7 +209,9 @@ const ProductDetail = () => {
           </SweetButtons>
         </ProductActionMobile>
       </Section>
-      <MoreToLove />
+      <MoreToLove title="You Might Love These Also" Description="" />
+      <CustomersReview />
+      <MoreToLove title="Others" Description="More To Love" />
     </Container>
   );
 };

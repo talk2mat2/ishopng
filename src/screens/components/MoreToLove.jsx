@@ -67,11 +67,12 @@ const HeaderText2 = styled.h2`
 //     />
 //   );
 // };
-const MoreToLove = () => {
+const MoreToLove = (props) => {
+  const { title, Description } = props;
   return (
     <Div>
       <HeaderText2>
-        Discover More - People Also Bought Some Of These
+        {title}- {Description}
       </HeaderText2>
 
       <Swiper

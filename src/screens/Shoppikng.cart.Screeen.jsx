@@ -6,6 +6,7 @@ import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import MoreToLove from "./components/MoreToLove";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -134,11 +135,15 @@ const Cards = styled.div`
 const CartPeoduct = (props) => {
   const [itemNumber, setItemNumber] = useState(0);
   const { stock } = props;
+  const history = useHistory();
   const handleIncrement = () => {
     itemNumber < stock && setItemNumber(itemNumber + 1);
   };
   const handleDecrement = () => {
     itemNumber && setItemNumber(itemNumber - 1);
+  };
+  const handleClick = () => {
+    history.push("/item_Detail");
   };
   const ImageDetail = {
     height: "80px",
@@ -147,7 +152,7 @@ const CartPeoduct = (props) => {
     <ProductContainer>
       <Productsection>
         <img src="/shirt.jpg" style={ImageDetail} alt="pic" />
-        <div style={{ width: "70%" }}>
+        <div style={{ width: "70%" }} onClick={handleClick.bind(this, "")}>
           <HeaderText2>Mens Mopi Shirts</HeaderText2>
           <MediumText>
             Also entitled to free returns if products dont match

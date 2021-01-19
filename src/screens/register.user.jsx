@@ -69,6 +69,7 @@ const Inpute = styled.input`
   &:focus {
     outline: none;
     box-shadow: 0px 0px 2px ${({ borderColor }) => borderColor};
+    border-color: blue;
   }
 `;
 
