@@ -211,7 +211,10 @@ const ProductDetail = () => {
       </Section>
       <MoreToLove title="You Might Love These Also" Description="" />
       <CustomersReview />
-      <MoreToLove title="Others" Description="More To Love" />
+      <MoreToLove
+        title="Check these"
+        Description="Customers also bought these items.."
+      />
     </Container>
   );
 };

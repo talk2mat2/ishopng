@@ -8,7 +8,7 @@ const Div = styled.div`
   min-height: 250px;
   width: 100%;
   border-radius: 10px;
-  background-color: #ffff;
+  background-color: #ffffff;
   padding: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -18,17 +18,6 @@ const MediuText = styled.p`
   font-size: 13px;
   margin-bottom: 1px;
 `;
-
-const slideSWiper = {
-  width: "100%",
-  alignItems: "center",
-  textAlign: "center",
-  backgroundColor: "#Ffff",
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  justifyContent: "center",
-};
 
 const HeaderText2 = styled.h2`
   color: grey;
@@ -54,7 +43,9 @@ const HeaderText2 = styled.h2`
 const Review = (props) => {
   const { rating, Name, Message } = props;
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "white", marginBottom: "1px", padding: "2PX" }}
+    >
       <MediuText>{Name}</MediuText>
       <Ratings rating={rating} />
       <MediuText>{Message}</MediuText>

@@ -66,8 +66,20 @@ const TopText = styled.div`
   display: flex;
 `;
 
+const CircleItem = styled.div`
+  height: 18px;
+  width: 18px;
+  border-radius: 100%;
+  background-color: ${({ Color }) => Color || "tomato"};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 4px;
+`;
+
 const DealsSwiper = (props) => {
-  const { dealname, dealDescription } = props;
+  const { dealname, dealDescription, Icon, Color } = props;
+
   const history = useHistory();
   const handleClick = () => {
     history.push("/item_Detail");
@@ -75,8 +87,17 @@ const DealsSwiper = (props) => {
   return (
     <Div>
       <TopText>
-        <p style={{ color: "black" }}>
-          {dealname}- {dealDescription}
+        <p
+          style={{
+            color: "black",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <CircleItem Color={Color}>
+            {Icon && <Icon fontSize="medium" style={{ color: "white" }} />}
+          </CircleItem>
+          {dealname}- {dealDescription}{" "}
         </p>
         <p
           style={{
@@ -94,7 +115,7 @@ const DealsSwiper = (props) => {
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
-        scrollbar={{ draggable: true }}
+        // scrollbar={{ draggable: true }}
         onSwiper={(swiper) => {}}
         onSlideChange={() => {}}
         style={{ height: "80%" }}

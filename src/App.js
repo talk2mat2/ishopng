@@ -11,6 +11,9 @@ import LoginScreen from './screens/LoginScreen';
 import Firebase from './firebase/firebase'
 import {useDispatch,useSelector} from "react-redux"
 import {loginUsersuccess} from "./redux/action"
+import FlashOnIcon from "@material-ui/icons/FlashOn";
+import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
+import StarIcon from "@material-ui/icons/Star";
 import {
   BrowserRouter as Router,
   Switch,
@@ -38,9 +41,9 @@ function Landing(){
   <CoinsSection><CoinsDeals/></CoinsSection>
   <Swipper />
   <FlashDeals/>
-  <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this "/>
-  <DealsSwiper dealname="Top Deals" dealDescription="you will love these"/>
-  <DealsSwiper dealname="Featured Products" dealDescription="from recomendations"/>
+  <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this " Icon={FlashOnIcon} Color="green"/>
+  <DealsSwiper dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
+  <DealsSwiper dealname="Featured Products" dealDescription="from recomendations" Icon={StarIcon} Color="blue"/>
   <RecentlyViewed/> 
  
  

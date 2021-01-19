@@ -4,7 +4,7 @@ import styled from "styled-components";
 const SweetButton = styled.button`
   background-color: ${({ color }) => (color ? color : "orange")};
   border: 1px solid grey;
-  color: #ffff;
+  color: white;
   position: relative;
   align-self: center;
 

@@ -81,7 +81,6 @@ const MoreToLove = (props) => {
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
-        scrollbar={{ draggable: true }}
         onSwiper={(swiper) => {}}
         onSlideChange={() => {}}
         style={{ height: "90%" }}
