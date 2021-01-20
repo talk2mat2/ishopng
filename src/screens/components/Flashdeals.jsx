@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Div = styled.div`
   width: 100%;
   min-height: 10px;
-  background-color: white;
+  background-color: #f9f9f3;
   margin-top: 2;
   padding: 0;
   display: flex;
