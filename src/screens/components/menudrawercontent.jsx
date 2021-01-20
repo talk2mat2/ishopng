@@ -11,7 +11,6 @@ const P = styled.p`
   padding: 3px;
   font-size: 13px;
   padding-left: 4px;
-  padding: 3px;
 `;
 
 const H3 = styled.h3`
@@ -23,7 +22,7 @@ const H3 = styled.h3`
 
 const Dealsresponsive1 = styled.p`
   color: grey;
-  margin-top: 8px;
+  padding: 3px;
   cursor: pointer;
   @media (min-width: 1086px) {
     display: none;
@@ -32,7 +31,7 @@ const Dealsresponsive1 = styled.p`
 const Dealsresponsive2 = styled.p`
   color: grey;
   cursor: pointer;
-  margin-top: 8px;
+  padding: 3px;
   @media (min-width: 886px) {
     display: none;
   }
@@ -40,6 +39,7 @@ const Dealsresponsive2 = styled.p`
 const Dealsresponsive3 = styled.p`
   color: grey;
   margin-top: 8px;
+  padding: 3px;
   cursor: pointer;
   @media (min-width: 600px) {
     display: none;
@@ -102,17 +102,17 @@ export default function Menudrawercontent(props) {
         }}
       >
         <div style={{ width: "49%" }}>
-          <H3>Your Services</H3>
-          <P>Your Orders</P>
-          <P>Your Lists</P>
-          <P>Your Recommendation</P>
-          <P>Your Subscribe & Save Items</P>
-          <P>Your Gift Card Balance</P>
-          <P>Your Pets</P>
-          <P>Memberships & Subscriptions</P>
-          <P>Your Unlimited</P>
+          <H3>Categories</H3>
+          <P>Electronics</P>
+          <P>Beauty And Health</P>
+          <P>Computer And Office</P>
+          <P>Mobile Phones</P>
+          <P>Fashions</P>
+          <P>Home And Garden</P>
+          <P>Furniture</P>
+
           <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
+
           <P>Memberships & Subscriptions</P>
           <H3> Deals</H3>
           <Dealsresponsive3>last Minute</Dealsresponsive3>
@@ -135,22 +135,16 @@ export default function Menudrawercontent(props) {
           <H3>Your Accounts</H3>
 
           <P>Your Orders</P>
-          <P>Your Lists</P>
-          <P>Your Recommendations</P>
-          <P>Your Subscribe & Save Items</P>
-          <P>Your Gift Card Balance</P>
-          <P>Your Pets</P>
-          <P>Memberships & Subscriptions</P>
-          <P>Your Unlimited</P>
+          <P>Yet To Be Reviewed</P>
+          <P>Shiped</P>
+          <P>Your Subscribe & Whish Items</P>
+          <P>Your Coupons</P>
+          <P>Your Invitations</P>
+          <P>Followings </P>
+
           <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Memberships & Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
+
+          <P>Your Memberships </P>
         </div>
       </div>
     </div>

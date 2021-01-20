@@ -14,6 +14,9 @@ import {loginUsersuccess} from "./redux/action"
 import FlashOnIcon from "@material-ui/icons/FlashOn";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import StarIcon from "@material-ui/icons/Star";
+import { commerce } from "./libs/commerce";
+
+import {LIST_PRODUCTS_SUCCESS} from "./redux/action"
 import {
   BrowserRouter as Router,
   Switch,
@@ -37,13 +40,29 @@ const CoinsSection=styled.div`
 `
 
 function Landing(){
+  const Dispatch=useDispatch()
+
+useEffect(()=>{
+  function fetchProducts() {
+    commerce.products.list().then((products) => {
+      // this.setState({ products: products.data });
+      console.log(products.data)
+      Dispatch(LIST_PRODUCTS_SUCCESS(products.data))
+    }).catch((error) => {
+      console.log('There was an error fetching the products', error);
+    });
+  }
+  fetchProducts()
+},[])
+
   return(  <React.Fragment>
   <CoinsSection><CoinsDeals/></CoinsSection>
   <Swipper />
   <FlashDeals/>
-  <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this " Icon={FlashOnIcon} Color="green"/>
+    <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this " Icon={FlashOnIcon} Color="green"/>
   <DealsSwiper dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
   <DealsSwiper dealname="Featured Products" dealDescription="from recomendations" Icon={StarIcon} Color="blue"/>
+ 
   <RecentlyViewed/> 
  
  

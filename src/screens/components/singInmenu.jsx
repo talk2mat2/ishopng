@@ -76,16 +76,16 @@ const SingInMenuContent = (props) => {
       >
         <div style={{ width: "49%" }}>
           <H3>Your Services</H3>
-          <P>Your Orders</P>
-          <P>Your Lists</P>
-          <P>Your Recommendation</P>
-          <P>Your Subscribe & Save Items</P>
-          <P>Your Gift Card Balance</P>
-          <P>Your Pets</P>
-          <P>Memberships & Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
+          <P>Electronics</P>
+          <P>Beauty And Health</P>
+          <P>Computer And Office</P>
+          <P>Mobile Phones</P>
+          <P>Fashions</P>
+          <P>Home And Garden</P>
+          <P>Furniture</P>
+          <P>Watches</P>
+          <P>Wedding And Events</P>
+
           <P>Memberships & Subscriptions</P>
         </div>
         <div
@@ -95,22 +95,22 @@ const SingInMenuContent = (props) => {
           <H3>Your Accounts</H3>
 
           <P>Your Orders</P>
-          <P>Your Lists</P>
-          <P>Your Recommendations</P>
-          <P>Your Subscribe & Save Items</P>
-          <P>Your Gift Card Balance</P>
-          <P>Your Pets</P>
-          <P>Memberships & Subscriptions</P>
+          <P>Yet To Be Reviewed</P>
+          <P>Shiped</P>
+          <P>Your Subscribe & Whish Items</P>
+          <P>Your Coupons</P>
+          <P>Your Invitations</P>
+          <P>Followings </P>
+
+          <P>Your Music Subscriptions</P>
+
+          <P>Your Memberships </P>
+          {/* <P>Your Unlimited</P>
+          <P>Your Music Subscriptions</P>
           <P>Your Unlimited</P>
           <P>Your Music Subscriptions</P>
           <P>Your Unlimited</P>
-          <P>Memberships & Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
-          <P>Your Unlimited</P>
-          <P>Your Music Subscriptions</P>
+          <P>Your Music Subscriptions</P> */}
         </div>
       </div>
     </div>

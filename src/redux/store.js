@@ -1,7 +1,7 @@
 import { createStore,combineReducers } from 'redux'
-import{ UserReducers} from './reducer'
+import{ UserReducers,productReducer} from './reducer'
 
-const rootReducer=combineReducers({user:UserReducers})
+const rootReducer=combineReducers({user:UserReducers,products:productReducer})
 
 
 

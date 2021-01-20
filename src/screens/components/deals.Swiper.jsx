@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import CardProductLanding from "./CardProductLanding";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // // Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -65,7 +67,10 @@ const TopText = styled.div`
   min-height: 18%;
   display: flex;
 `;
-
+const Loader = styled.div`
+  width: 30px;
+  margin: 120px auto;
+`;
 const CircleItem = styled.div`
   height: 18px;
   width: 18px;
@@ -79,7 +84,7 @@ const CircleItem = styled.div`
 
 const DealsSwiper = (props) => {
   const { dealname, dealDescription, Icon, Color } = props;
-
+  const products = useSelector((state) => state.products);
   const history = useHistory();
   const handleClick = () => {
     history.push("/item_Detail");
@@ -110,111 +115,119 @@ const DealsSwiper = (props) => {
           see details
         </p>
       </TopText>
-      <Swiper
-        loop={true}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation={true}
-        // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => {}}
-        onSlideChange={() => {}}
-        style={{ height: "80%" }}
-      >
-        <SwiperSlide style={slideSWiper}>
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt2.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt4.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt4.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-        </SwiperSlide>
-        <SwiperSlide style={slideSWiper}>
-          <CardProductLanding
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt4.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            imagesrc="/shirt4.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-        </SwiperSlide>
-        <SwiperSlide style={slideSWiper}>
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt4.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt4.jpg"
-            price="=N=20.90"
-          />
-        </SwiperSlide>
-        <SwiperSlide style={slideSWiper}>
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt3.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-          <CardProductLanding
-            onClick={handleClick.bind(this, "")}
-            imagesrc="/shirt4.jpg"
-            description="mens heavy wear"
-            price="=N=20.90"
-          />
-        </SwiperSlide>
-      </Swiper>
+      {products.length ? (
+        <>
+          <Swiper
+            loop={true}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation={true}
+            // scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => {}}
+            onSlideChange={() => {}}
+            style={{ height: "80%" }}
+          >
+            <SwiperSlide style={slideSWiper}>
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt2.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt4.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt4.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+            </SwiperSlide>
+            <SwiperSlide style={slideSWiper}>
+              <CardProductLanding
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt4.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                imagesrc="/shirt4.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+            </SwiperSlide>
+            <SwiperSlide style={slideSWiper}>
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt4.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt4.jpg"
+                price="=N=20.90"
+              />
+            </SwiperSlide>
+            <SwiperSlide style={slideSWiper}>
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt3.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+              <CardProductLanding
+                onClick={handleClick.bind(this, "")}
+                imagesrc="/shirt4.jpg"
+                description="mens heavy wear"
+                price="=N=20.90"
+              />
+            </SwiperSlide>
+          </Swiper>
+        </>
+      ) : (
+        <Loader>
+          <CircularProgress size={20} color="secondary" />
+        </Loader>
+      )}
     </Div>
   );
 };
