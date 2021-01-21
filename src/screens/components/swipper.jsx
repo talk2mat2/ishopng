@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -38,7 +38,7 @@ const Div = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 768px) {
-    height: 310px;
+    height: 180px;
   }
 `;
 
@@ -62,60 +62,68 @@ const Loader = styled.div`
 
 const Swipper = () => {
   const products = useSelector((state) => state.products);
+  const [HeaderSwiper, setHeaderSwiper] = useState([]);
+
+  const getHeaderswiperItems = (products) => {
+    let temp = [];
+    products.length &&
+      products.map((items) =>
+        items.categories.map(async (category) =>
+          category.name === "HeaderSwiper" ? temp.push(items) : null
+        )
+      );
+    setHeaderSwiper(temp);
+  };
+
+  // name === "HeaderSwiper"
+  // ? console.log(items)
+  // : console.log("no such items")
+  // items.categories.map(category=>category.name="HeaderSwiper"?console.log(items):nulls)));
+  const ListSlides = () => {
+    return HeaderSwiper.map((items) => (
+      <SwiperSlide style={slideSWiper}>
+        <img
+          src={items["media"]["source"]}
+          style={{
+            height: "100%",
+          }}
+          alt="img"
+        />
+      </SwiperSlide>
+    ));
+  };
+
+  useEffect(() => {
+    getHeaderswiperItems(products);
+    console.log("how far");
+  }, [products]);
+
   return (
     <Div>
       {products.length ? (
-        <>
-          <Swiper
-            autoplay={true}
-            loop={true}
-            spaceBetween={100}
-            slidesPerView={1}
-            navigation={true}
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => {}}
-            onSlideChange={() => {}}
-            style={{ height: "100%" }}
-          >
-            <SwiperSlide style={slideSWiper}>
-              <img
-                src="./iphone12.jpg"
-                style={{
-                  height: "100%",
-                }}
-                alt="img"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={slideSWiper}>
-              <img
-                src="./samsung.jpg"
-                style={{
-                  height: "100%",
-                }}
-                alt="img"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={slideSWiper}>
-              <img
-                src="./fridge.jpg"
-                style={{
-                  height: "100%",
-                }}
-                alt="img"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={slideSWiper}>
-              <img
-                src="./hp.jpg"
-                style={{
-                  height: "100%",
-                }}
-                alt="img"
-              />
-            </SwiperSlide>
-          </Swiper>
-        </>
+        <Swiper
+          autoplay={true}
+          loop={true}
+          spaceBetween={100}
+          slidesPerView={1}
+          navigation={false}
+          pagination={{ clickable: true }}
+          // scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => {}}
+          onSlideChange={() => {}}
+          style={{ height: "100%" }}
+        >
+          {ListSlides()}
+          <SwiperSlide style={slideSWiper}>
+            <img
+              src="./fridge.jpg"
+              style={{
+                height: "100%",
+              }}
+              alt="img"
+            />
+          </SwiperSlide>
+        </Swiper>
       ) : (
         <Loader>
           <CircularProgress size={20} color="secondary" />

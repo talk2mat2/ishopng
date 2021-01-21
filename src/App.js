@@ -59,7 +59,7 @@ useEffect(()=>{
   <CoinsSection><CoinsDeals/></CoinsSection>
   <Swipper />
   <FlashDeals/>
-    <DealsSwiper dealname="Flash Deals" dealDescription="dont miss this " Icon={FlashOnIcon} Color="green"/>
+    <DealsSwiper dealname="Flash Deals" dealDescription="Hot now up to 90% off " Icon={FlashOnIcon} Color="green"/>
   <DealsSwiper dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
   <DealsSwiper dealname="Featured Products" dealDescription="from recomendations" Icon={StarIcon} Color="blue"/>
  
