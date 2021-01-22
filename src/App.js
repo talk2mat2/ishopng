@@ -1,6 +1,6 @@
 
 import './App.css';
-import React, {useEffect}from 'react';
+import React, {useEffect,useState}from 'react';
 import Navbar from './screens/components/navbar/navbar';
 import Swipper from './screens/components/swipper';
 import FlashDeals from './screens/components/Flashdeals';
@@ -32,6 +32,8 @@ import RegisterUser from './screens/register.user';
 import ScrollToTop from './ScrollToTop';
 import CoinsDeals from './screens/components/coins';
 import styled from "styled-components"
+import { Button } from '@material-ui/core';
+
 
 const CoinsSection=styled.div`
 @media (min-width: 768px) {
@@ -40,6 +42,10 @@ const CoinsSection=styled.div`
 `
 
 function Landing(){
+  const products = useSelector((state) => state.products);
+  const [flashDealsItems,setFlashDealsItems]=useState([])
+  const [NewArrivals,setNewArrivals]=useState([])
+  const [TopDeals, setTopDeals]=useState([])
   const Dispatch=useDispatch()
 
 useEffect(()=>{
@@ -55,13 +61,51 @@ useEffect(()=>{
   fetchProducts()
 },[])
 
+const getfLashDealsItems = (products) => {
+  let temp = [];
+  products.length &&
+    products.map((items) =>
+      items.categories.map(async (category) =>
+        category.name === "Flash Deals" ? temp.push(items) : null
+      )
+    );
+  setFlashDealsItems(temp);
+};
+const getNewArrivals = (products) => {
+  let temp = [];
+  products.length &&
+    products.map((items) =>
+      items.categories.map(async (category) =>
+        category.name === "New Arrivals" ? temp.push(items) : null
+      )
+    );
+  setNewArrivals(temp);
+};
+const getTopDeals = (products) => {
+  let temp = [];
+  products.length &&
+    products.map((items) =>
+      items.categories.map(async (category) =>
+        category.name === "TopDeals" ? temp.push(items) : null
+      )
+    );
+  setTopDeals(temp);
+};
+
+useEffect(()=>{
+  getfLashDealsItems(products)
+  getNewArrivals(products)
+  getTopDeals(products)
+},[products])
+
   return(  <React.Fragment>
   <CoinsSection><CoinsDeals/></CoinsSection>
   <Swipper />
+
+  <DealsSwiper product_deals={NewArrivals} dealname="New Arrivals" dealDescription="latest in the block" Icon={StarIcon} Color="blue"/>
+    <DealsSwiper product_deals={flashDealsItems} dealname="Flash Deals" dealDescription="trending  " Icon={FlashOnIcon} Color="green"/>
   <FlashDeals/>
-    <DealsSwiper dealname="Flash Deals" dealDescription="Hot now up to 90% off " Icon={FlashOnIcon} Color="green"/>
-  <DealsSwiper dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
-  <DealsSwiper dealname="Featured Products" dealDescription="from recomendations" Icon={StarIcon} Color="blue"/>
+  <DealsSwiper product_deals={TopDeals}  dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
  
   <RecentlyViewed/> 
  

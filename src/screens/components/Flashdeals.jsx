@@ -15,7 +15,7 @@ const Div = styled.div`
   justify-content: center;
 `;
 
-const FlashDeals = () => {
+const FlashDeals = (props) => {
   const products = useSelector((state) => state.products);
   return (
     <Div>

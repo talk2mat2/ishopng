@@ -46,7 +46,6 @@ const ImgDiv = styled.div`
 const P = styled.p`
   color: grey;
   cursor: pointer;
-  color: #add8e6;
 `;
 const Cardsflash = (props) => {
   return (

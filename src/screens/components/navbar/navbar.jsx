@@ -214,22 +214,23 @@ const Navbar = (props) => {
                 borderRadius: "100%",
                 position: "absolute",
                 height: "16px",
-                width: "16px",
+                minWidth: "16px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "white",
+                backgroundColor: "orange",
                 top: "8px",
+                padding: "1px",
               }}
             >
               <p
                 style={{
-                  color: "green",
+                  color: "white",
                   fontWeight: "bold",
                   fontSize: "16px",
                 }}
               >
-                2
+                8
               </p>
             </div>
             <h3>

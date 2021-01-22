@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CardProductLanding from "./CardProductLanding";
 import { useHistory } from "react-router-dom";
@@ -83,12 +83,59 @@ const CircleItem = styled.div`
 `;
 
 const DealsSwiper = (props) => {
-  const { dealname, dealDescription, Icon, Color } = props;
+  const { dealname, dealDescription, Icon, Color, product_deals } = props;
+
   const products = useSelector((state) => state.products);
   const history = useHistory();
-  const handleClick = () => {
-    history.push("/item_Detail");
+  const handleClick = (items) => {
+    history.push({
+      pathname: "/item_Detail",
+      state: items,
+      search: `?query=${items.id}`,
+    });
   };
+  // useEffect(() => {
+  //   console.log(product_deals);
+  // });
+  const ListSlides = () => (
+    <>
+      <SwiperSlide style={slideSWiper}>
+        {product_deals.slice(0, 5).map((items, index) => (
+          <CardProductLanding
+            onClick={handleClick.bind(this, items)}
+            imagesrc={items["media"]["source"]}
+            description={items.name}
+            price={items["price"]["formatted_with_symbol"]}
+          />
+        ))}
+      </SwiperSlide>
+      {product_deals.length > 5 && (
+        <SwiperSlide style={slideSWiper}>
+          {product_deals.slice(5, 10).map((items) => (
+            <CardProductLanding
+              onClick={handleClick.bind(this, items)}
+              imagesrc={items["media"]["source"]}
+              description={items.name}
+              price={items["price"]["formatted_with_symbol"]}
+            />
+          ))}
+        </SwiperSlide>
+      )}
+      {product_deals.length > 10 && (
+        <SwiperSlide style={slideSWiper}>
+          {product_deals.slice(10, 15).map((items) => (
+            <CardProductLanding
+              key={items.id}
+              onClick={handleClick.bind(this, items)}
+              imagesrc={items["media"]["source"]}
+              description={items.name}
+              price={items["price"]["formatted_with_symbol"]}
+            />
+          ))}
+        </SwiperSlide>
+      )}
+    </>
+  );
   return (
     <Div>
       <TopText>
@@ -115,7 +162,7 @@ const DealsSwiper = (props) => {
           see details
         </p>
       </TopText>
-      {products.length ? (
+      {product_deals.length ? (
         <>
           <Swiper
             loop={true}
@@ -127,100 +174,7 @@ const DealsSwiper = (props) => {
             onSlideChange={() => {}}
             style={{ height: "80%" }}
           >
-            <SwiperSlide style={slideSWiper}>
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt2.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt4.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt4.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={slideSWiper}>
-              <CardProductLanding
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt4.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                imagesrc="/shirt4.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={slideSWiper}>
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt4.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt4.jpg"
-                price="=N=20.90"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={slideSWiper}>
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt3.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-              <CardProductLanding
-                onClick={handleClick.bind(this, "")}
-                imagesrc="/shirt4.jpg"
-                description="mens heavy wear"
-                price="=N=20.90"
-              />
-            </SwiperSlide>
+            {ListSlides()}
           </Swiper>
         </>
       ) : (

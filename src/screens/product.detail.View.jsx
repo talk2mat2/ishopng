@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Ratings from "./components/ratings";
 import SweetButtons from "./components/SweetButtons";
@@ -6,6 +6,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ShopIcon from "@material-ui/icons/Shop";
 import MoreToLove from "./components/MoreToLove";
 import CustomersReview from "./components/CustomerRatings";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -41,6 +42,12 @@ const Description = styled.div`
   background-color: white;
   @media (max-width: 768px) {
     width: 100%;
+  }
+`;
+
+const Discription = styled.div`
+  p {
+    color: grey;
   }
 `;
 const HeaderText = styled.h1`
@@ -94,81 +101,94 @@ const ImageDetail = styled.img`
   @media (max-width: 768px) {
     // width: 200px;
     // height: 250px;
-    height: 350px;
+    height: 70vw;
   } ;
 `;
-const ProductDetail = () => {
+const ProductDetail = (props) => {
+  const history = useHistory();
+  const [state, setState] = useState({});
+
+  useEffect(() => {
+    setState(history.location.state);
+    console.log(history.location.state);
+  }, [history.location.state]);
   return (
     <Container>
       {/* <h3 style={{ color: "grey" ,}}>PRODUCT DETAIL</h3> */}
 
       <Section>
         <div>
-          <ImageDetail src="/shirt.jpg" alt="pic" />
+          <ImageDetail src={state.media && state.media.source} alt="pic" />
         </div>
         <Description>
-          <HeaderText>Mens Mopi Shirts</HeaderText>
+          <HeaderText>{state.name && state.name}</HeaderText>
           <Inline>
             <Ratings rating={3} />
             <MediuText>162 ratings</MediuText>
           </Inline>
           <Divider></Divider>
           <MediuText>price:</MediuText>
-          <HeaderText>=N=16 - =N= 34 </HeaderText>
+          <HeaderText>
+            {state["price"] && state["price"]["formatted_with_symbol"]}
+          </HeaderText>
           <MediuText>
-            Also entitled to free returns if products dont match
+            Also entitled to ishop free returns if products dont match
           </MediuText>
           <HeaderText>
             <MediuText>fits:</MediuText>Adults
           </HeaderText>
+          <MediuText>
+            Available Stock: {state["quantity"] && state["quantity"]}
+          </MediuText>
           <div style={{ lineHeight: "1%", marginTop: "10px" }}>
             <HeaderText>
-              <MediuText>Size:</MediuText>
+              <MediuText>Variants:</MediuText>
             </HeaderText>
             <select
-              name="cars"
-              id="cars"
-              defaultValue="xl"
+              name="variants"
+              id="variants"
+              defaultValue="select"
               style={{ height: "30px" }}
             >
+              {" "}
               <option value="Select">Select</option>
-              <option value="l">Saab</option>
-              <option value="m">M</option>
-              <option value="xxl">xxl</option>
+              {state["variants"] &&
+                state.variants.length &&
+                state.variants.map((values) => (
+                  <option value={values.name}>{values.name}</option>
+                ))}
             </select>
           </div>
-          <ul style={{ alignSelf: "center" }}>
-            <li>
-              <MediuText>Fabric loop</MediuText>
-            </li>
-            <li>
-              <MediuText>100% Cotton</MediuText>
-            </li>
-            <li>
-              <MediuText>Machine Wash</MediuText>
-            </li>
-            <li>
-              <MediuText>Collar Style</MediuText>
-            </li>
-            <li>
-              <MediuText>Fabric loop</MediuText>
-            </li>
-            <li>
-              <MediuText>egular Fit</MediuText>
-            </li>
-          </ul>
+
+          {/* 
+          <option value="Select">Select</option>
+              <option value="l">Saab</option>
+              <option value="m">M</option>
+              <option value="xxl">xxl</option> */}
+
+          {state.description && (
+            <Discription
+              dangerouslySetInnerHTML={{
+                __html: state.description,
+              }}
+            />
+          )}
         </Description>
         <ProductAction>
           <MediuText>price:</MediuText>
-          <HeaderText>=N=16 - =N= 34 </HeaderText>
+          <HeaderText>
+            {state["price"] && state["price"]["formatted_with_symbol"]}
+          </HeaderText>
           <MediuText>
-            Also entitled to free returns if products dont match
+            Also entitled to ishop free returns if products dont match
           </MediuText>
           <MediuText>Arrives: Wednesday, Jan 27</MediuText>
           <MediuText>Fastest delivery: Monday, Jan 25</MediuText>
 
           <HeaderText>
-            <MediuText>Stock:</MediuText>3
+            <MediuText>
+              Stock: {state["quantity"] && state["quantity"]}
+            </MediuText>
           </HeaderText>
           <SweetButtons height="30px" name="Add To Cart">
             <AddShoppingCartIcon

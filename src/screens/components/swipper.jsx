@@ -29,7 +29,7 @@ SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
 
 const Div = styled.div`
   // background-color: white;
-  height: 400px;
+  height: 350px;
   width: 100%;
 
   background-color: white;
@@ -38,7 +38,7 @@ const Div = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 768px) {
-    height: 180px;
+    height: 210px;
   }
 `;
 
@@ -46,7 +46,7 @@ const slideSWiper = {
   width: "100%",
   alignItems: "center",
   textAlign: "center",
-  backgroundColor: "#Ffff",
+  // backgroundColor: "silver",
   display: "flex",
 
   justifyContent: "center",
@@ -81,7 +81,7 @@ const Swipper = () => {
   // items.categories.map(category=>category.name="HeaderSwiper"?console.log(items):nulls)));
   const ListSlides = () => {
     return HeaderSwiper.map((items) => (
-      <SwiperSlide style={slideSWiper}>
+      <SwiperSlide style={slideSWiper} key={items.id}>
         <img
           src={items["media"]["source"]}
           style={{
@@ -104,7 +104,7 @@ const Swipper = () => {
         <Swiper
           autoplay={true}
           loop={true}
-          spaceBetween={100}
+          spaceBetween={1}
           slidesPerView={1}
           navigation={false}
           pagination={{ clickable: true }}
