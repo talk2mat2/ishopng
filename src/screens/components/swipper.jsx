@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Blur from "react-css-blur";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 // // Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -47,6 +49,7 @@ const slideSWiper = {
   alignItems: "center",
   textAlign: "center",
   // backgroundColor: "silver",
+
   display: "flex",
 
   justifyContent: "center",
@@ -61,7 +64,8 @@ const Loader = styled.div`
 `;
 
 const Swipper = () => {
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products["products"]);
+  const products_error = useSelector((state) => state.products.error);
   const [HeaderSwiper, setHeaderSwiper] = useState([]);
 
   const getHeaderswiperItems = (products) => {
@@ -85,10 +89,21 @@ const Swipper = () => {
         <img
           src={items["media"]["source"]}
           style={{
-            height: "100%",
+            height: "99%",
+            position: "absolute",
+            borderRadius: "7px",
+            zIndex: 1,
           }}
           alt="img"
         />
+
+        {/* <Blur radius={"20px"}>
+          <img
+            src={items["media"]["source"]}
+            style={{ width: "100%" }}
+            alt="img"
+          />
+        </Blur> */}
       </SwiperSlide>
     ));
   };
@@ -116,14 +131,23 @@ const Swipper = () => {
           {ListSlides()}
           <SwiperSlide style={slideSWiper}>
             <img
-              src="./fridge.jpg"
+              src="./shirt.jpg"
               style={{
                 height: "100%",
+                zIndex: 1,
+                position: "absolute",
               }}
               alt="img"
             />
+            {/* <Blur radius={"20px"}>
+              <img src="./hp.jpg" style={{ width: "100%" }} alt="img" />
+            </Blur> */}
           </SwiperSlide>
         </Swiper>
+      ) : products_error ? (
+        <Loader>
+          <ErrorOutlineIcon fontSize="large" color="secondary" />
+        </Loader>
       ) : (
         <Loader>
           <CircularProgress size={20} color="secondary" />

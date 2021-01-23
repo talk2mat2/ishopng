@@ -16,7 +16,7 @@ import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import StarIcon from "@material-ui/icons/Star";
 import { commerce } from "./libs/commerce";
 
-import {LIST_PRODUCTS_SUCCESS} from "./redux/action"
+import {LIST_PRODUCTS_SUCCESS,FETCH_CART_SUCCESS,LIST_PRODUCTS_ERROR} from "./redux/action"
 import {
   BrowserRouter as Router,
   Switch,
@@ -42,24 +42,12 @@ const CoinsSection=styled.div`
 `
 
 function Landing(){
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products["products"]);
   const [flashDealsItems,setFlashDealsItems]=useState([])
   const [NewArrivals,setNewArrivals]=useState([])
   const [TopDeals, setTopDeals]=useState([])
   const Dispatch=useDispatch()
 
-useEffect(()=>{
-  function fetchProducts() {
-    commerce.products.list().then((products) => {
-      // this.setState({ products: products.data });
-      console.log(products.data)
-      Dispatch(LIST_PRODUCTS_SUCCESS(products.data))
-    }).catch((error) => {
-      console.log('There was an error fetching the products', error);
-    });
-  }
-  fetchProducts()
-},[])
 
 const getfLashDealsItems = (products) => {
   let temp = [];
@@ -115,9 +103,30 @@ useEffect(()=>{
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
-
+const[loading,setLoading]= useState(false)
 const Dispatch=useDispatch()
 
+useEffect(()=>{
+  function fetchProducts() {
+    commerce.products.list().then((products) => {
+      // this.setState({ products: products.data });
+      console.log(products.data)
+      Dispatch(LIST_PRODUCTS_SUCCESS(products.data))
+        commerce.cart.retrieve().then((cart) => {
+          Dispatch(FETCH_CART_SUCCESS({ cart }));
+    
+        }).catch((error) => {
+          console.error('There was an error fetching the cart', error);
+         
+        });
+    
+    }).catch((error) => {
+      console.log('There was an error fetching the products', error);
+      Dispatch(LIST_PRODUCTS_ERROR());
+    });
+  }
+  fetchProducts()
+},[])
 
 useEffect(()=>{
 const CheckAuth=()=>{
@@ -164,13 +173,16 @@ CheckAuth()
 <Landing/>
  </Route>
 
- <Route path="/signin" component={!currentUser ?LoginScreen:Landing} />
-
+ <Route path="/signin"  render={(props)=>!currentUser?<LoginScreen loading={loading} setLoading={setLoading} {...props} />:<Landing {...props} />}/>
+{/* 
+ <Route path="/signin" >
+{!currentUser ? <LoginScreen loading={false} setLoading={setLoading}/>:<Landing/>}
+ </Route> */}
  <Route path="/signup" >
-{!currentUser ? <RegisterUser/>:<Landing/>}
+{!currentUser ? <RegisterUser loading={false} setLoading={setLoading}/>:<Landing/>}
  </Route>
  <Route path="/cart" >
- <ShoppingCart/>
+ <ShoppingCart loading={loading} setLoading={setLoading} />
  </Route>
  <Route path="/item_Detail" >
   <ProductDetail/>

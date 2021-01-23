@@ -10,10 +10,20 @@ else{return state}
 
 
 }
-const Product_init_state=[]
+const Product_init_state={products:{},error:false}
 export const productReducer=(state=Product_init_state,action)=>{
   if(action.type===Action_types.LIST_PRODUCTS_SUCCESS){
-    return[...action.payload]
+    return{...state,products:action.payload,error:false}
+}
+  if(action.type===Action_types.LIST_PRODUCTS_ERROR){
+    return{...state,error:true}
+}
+else{return state}
+}
+const cart_init_state=[]
+export const cartReducer=(state=cart_init_state,action)=>{
+  if(action.type===Action_types.FETCH_CART_SUCCESS){
+    return{...action.payload}
 }
 else{return state}
 }

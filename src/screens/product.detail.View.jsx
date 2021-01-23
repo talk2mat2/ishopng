@@ -7,6 +7,11 @@ import ShopIcon from "@material-ui/icons/Shop";
 import MoreToLove from "./components/MoreToLove";
 import CustomersReview from "./components/CustomerRatings";
 import { useHistory } from "react-router-dom";
+import { commerce } from "../libs/commerce";
+import { useDispatch } from "react-redux";
+import { FETCH_CART_SUCCESS } from "../redux/action";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -27,7 +32,7 @@ const Section = styled.section`
   width: 100%;
   background-color: white;
   min-height: 400px;
-  align-items: center;
+  align-items: flex-start;
 
   justify-content: space-between;
   @media (max-width: 768px) {
@@ -106,14 +111,60 @@ const ImageDetail = styled.img`
 `;
 const ProductDetail = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [state, setState] = useState({});
+  const [open, setOpen] = useState({ status: false, message: "" });
 
   useEffect(() => {
-    setState(history.location.state);
+    history.location.state
+      ? setState(history.location.state)
+      : history.push("/");
     console.log(history.location.state);
-  }, [history.location.state]);
+  }, [history.location.state, history]);
+
+  const handlesetOpen = (status, message) => {
+    setOpen({ ...open, status, message });
+  };
+
+  function handleAddToCart(productId, quantity) {
+    commerce.cart
+      .add(productId, quantity)
+      .then((item) => {
+        console.log(item.cart);
+        handlesetOpen(true, "this item was added to cart");
+        dispatch(FETCH_CART_SUCCESS({ cart: item.cart }));
+        // this.setState({ cart: item.cart });
+      })
+      .catch((error) => {
+        console.error("There was an error adding the item to the cart", error);
+      });
+  }
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
   return (
     <Container>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "center",
+        }}
+        open={open.status}
+        autoHideDuration={6000}
+        onClose={() => {
+          handlesetOpen(false, "");
+        }}
+      >
+        <Alert
+          onClose={() => {
+            handlesetOpen(false, "");
+          }}
+          severity="success"
+        >
+          {open.message}
+        </Alert>
+      </Snackbar>
       {/* <h3 style={{ color: "grey" ,}}>PRODUCT DETAIL</h3> */}
 
       <Section>
@@ -155,7 +206,9 @@ const ProductDetail = (props) => {
               {state["variants"] &&
                 state.variants.length &&
                 state.variants.map((values) => (
-                  <option value={values.name}>{values.name}</option>
+                  <option key={values.id} value={values.name}>
+                    {values.name}
+                  </option>
                 ))}
             </select>
           </div>
@@ -190,7 +243,13 @@ const ProductDetail = (props) => {
               Stock: {state["quantity"] && state["quantity"]}
             </MediuText>
           </HeaderText>
-          <SweetButtons height="30px" name="Add To Cart">
+          <SweetButtons
+            height="30px"
+            name="Add To Cart"
+            handleClick={() => {
+              handleAddToCart(state["id"], 1);
+            }}
+          >
             <AddShoppingCartIcon
               style={{ color: "#2f4f4f", position: "absolute", left: 10 }}
               fontSize="medium"
@@ -221,6 +280,9 @@ const ProductDetail = (props) => {
             height="50px"
             name="Add To Cart"
             fontSize="17px"
+            handleClick={() => {
+              handleAddToCart(state["id"], 1);
+            }}
           >
             <AddShoppingCartIcon
               style={{ color: "#2f4f4f", position: "absolute", left: 10 }}

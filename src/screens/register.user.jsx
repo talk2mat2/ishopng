@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SweetButtons from "./components/SweetButtons";
 import firebase from "../firebase/firebase";
+import WithSpinner from "./components/withSpinner";
 import {
   // Switch,
   // Route,
@@ -320,4 +321,4 @@ const RegisterUser = (props) => {
   );
 };
 
-export default RegisterUser;
+export default WithSpinner(RegisterUser);

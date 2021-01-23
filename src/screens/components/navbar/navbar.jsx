@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 // import ThreeDRotation from "@material-ui/icons/ThreeDRotation";
 
@@ -47,12 +47,18 @@ const Navbar = (props) => {
   const [flagMenuvisible, setflagMenuvisible] = useState(false);
   const [Menuvisible, setMenuvisible] = useState(false);
   const [searchValue, setsearchValue] = useState("");
+  const products = useSelector((state) => state.products.products);
 
   const currentUser = useSelector((state) => state.user.currentUser);
+  const cart = useSelector((state) => state.cart);
   const handlemenuvisibility = () => {
     setMenuvisible(!Menuvisible);
   };
   const history = useHistory();
+  const handleHome = () => {
+    !products.length && history.go(0);
+  };
+
   return (
     <div className="nav">
       {Menuvisible && (
@@ -93,7 +99,7 @@ const Navbar = (props) => {
           }}
         >
           {" "}
-          <Link to="/">
+          <Link to="/" onClick={handleHome.bind(this, "")}>
             <div>
               <img src="./logo.png" id="logoImg" alt="img" />
               {/* <p style={{ fontSize: "12px", fontWeight: "bold" }}>Ishop.ng</p> */}
@@ -112,12 +118,13 @@ const Navbar = (props) => {
               fontSize="default"
             />
             <div id="hello-section">
-              <h4>Select address</h4>
+              <h4>change shipping address</h4>
             </div>
           </div>
         </section>
         <section id="inputBlock">
           <Input
+            autoComplete="off"
             type="text"
             id="headerInput"
             value={searchValue}
@@ -230,7 +237,7 @@ const Navbar = (props) => {
                   fontSize: "16px",
                 }}
               >
-                8
+                {cart["cart"] && cart.cart["total_items"]}
               </p>
             </div>
             <h3>

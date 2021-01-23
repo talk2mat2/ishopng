@@ -9,6 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import Button from "@material-ui/core/Button";
+import WithSpinner from "./components/withSpinner";
 import {
   Switch,
   Route,
@@ -81,6 +82,7 @@ const LoginScreen = (props) => {
   const [inputeValue, setInputeValue] = useState("");
   const [isError, setError] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
+  const [errorMessage, seterrorMessage] = useState("");
   const [borderColor, setBorderColor] = useState("silver");
   const { match, history } = props;
   const location = useLocation();
@@ -97,28 +99,41 @@ const LoginScreen = (props) => {
           setError(true);
         } else {
           setBorderColor("blue");
+
           setError(false);
         }
       })
       .catch((error) => {
         setBorderColor("red");
+
         setError(true);
+        if (error.code === "auth/network-request-failed") {
+          seterrorMessage("network error occred");
+        } else {
+          seterrorMessage("user not registered or network error, try again");
+        }
       });
   };
   const signInWithEmailPassword = (email, password) => {
+    props.setLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
         // Signed in
+        props.setLoading(false);
         // ...
         console.log("loggged in success");
         console.log(user);
         history.push("/");
       })
       .catch((error) => {
+        // console.log(error.code);
         // var errorCode = error.code;
         // var errorMessage = error.message;
+        props.setLoading(false);
+        seterrorMessage(error.code);
+        return setOpen(true);
       });
   };
 
@@ -127,8 +142,11 @@ const LoginScreen = (props) => {
   };
   const handleSignIn = () => {
     if (!inputeValue) {
+      seterrorMessage("you left the field empty!");
       return setOpen(true);
     }
+    location.pathname === "/signin" && isError && setOpen(true);
+
     location.pathname === "/signin" &&
       !isError &&
       history.push(`${match.url}/password`);
@@ -184,7 +202,7 @@ const LoginScreen = (props) => {
                       fontSize: "11px",
                     }}
                   >
-                    {inputeValue}
+                    Welcome {inputeValue} !
                   </p>
                 </div>
                 <Inpute
@@ -193,6 +211,7 @@ const LoginScreen = (props) => {
                   value={passwordValue}
                   onChange={(e) => {
                     // setInputeValue(e.target.value);
+                    setBorderColor("silver");
                     setPasswordValue(e.target.value);
                   }}
                 />
@@ -201,18 +220,17 @@ const LoginScreen = (props) => {
           </Switch>
           <Dialog
             open={open}
-            TransitionComponent={Transition}
+            // TransitionComponent={Transition}
             keepMounted
             onClose={handleClose}
-            aria-labelledby="alert-dialog-slide-title"
-            aria-describedby="alert-dialog-slide-description"
+            aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-slide-title">
               {"Use Google's location service?"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                field can not be empty
+                {errorMessage}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -266,4 +284,4 @@ const LoginScreen = (props) => {
   );
 };
 
-export default LoginScreen;
+export default WithSpinner(LoginScreen);

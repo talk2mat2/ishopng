@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import CardProductLanding from "./CardProductLanding";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 // // Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -85,7 +86,7 @@ const CircleItem = styled.div`
 const DealsSwiper = (props) => {
   const { dealname, dealDescription, Icon, Color, product_deals } = props;
 
-  const products = useSelector((state) => state.products);
+  const products_error = useSelector((state) => state.products.error);
   const history = useHistory();
   const handleClick = (items) => {
     history.push({
@@ -102,6 +103,7 @@ const DealsSwiper = (props) => {
       <SwiperSlide style={slideSWiper}>
         {product_deals.slice(0, 5).map((items, index) => (
           <CardProductLanding
+            key={items.id}
             onClick={handleClick.bind(this, items)}
             imagesrc={items["media"]["source"]}
             description={items.name}
@@ -113,6 +115,7 @@ const DealsSwiper = (props) => {
         <SwiperSlide style={slideSWiper}>
           {product_deals.slice(5, 10).map((items) => (
             <CardProductLanding
+              key={items.id}
               onClick={handleClick.bind(this, items)}
               imagesrc={items["media"]["source"]}
               description={items.name}
@@ -177,6 +180,10 @@ const DealsSwiper = (props) => {
             {ListSlides()}
           </Swiper>
         </>
+      ) : products_error ? (
+        <Loader>
+          <ErrorOutlineIcon fontSize="large" color="secondary" />
+        </Loader>
       ) : (
         <Loader>
           <CircularProgress size={20} color="secondary" />

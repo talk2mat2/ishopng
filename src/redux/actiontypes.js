@@ -1,2 +1,4 @@
 export const loginUserSuccess="loginUserSucces"
 export const LIST_PRODUCTS_SUCCESS="LIST_PRODUCTS_SUCCESS"
+export const LIST_PRODUCTS_ERROR="LIST_PRODUCTS_ERROR"
+export const FETCH_CART_SUCCESS="FETCH_CART_SUCCESS"

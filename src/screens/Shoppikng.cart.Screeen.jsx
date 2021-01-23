@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SweetButtons from "./components/SweetButtons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -7,6 +7,13 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import MoreToLove from "./components/MoreToLove";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+// import { FETCH_CART_SUCCESS } from "../redux/action";
+import { commerce } from "../libs/commerce";
+import { FETCH_CART_SUCCESS } from "../redux/action";
+import WithSpinner from "./components/withSpinner";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -112,9 +119,8 @@ const Productsection = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1px;
-  align-items: flex-start;
-
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
 `;
 const SummeryItems = styled.div`
   min-height: 50%;
@@ -122,7 +128,6 @@ const SummeryItems = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1px;
-  justify-content: space-between;
 
   justify-content: space-between;
 `;
@@ -133,83 +138,191 @@ const Cards = styled.div`
   flex-wrap: wrap;
 `;
 const CartPeoduct = (props) => {
-  const [itemNumber, setItemNumber] = useState(0);
-  const { stock } = props;
+  const Dispatch = useDispatch();
+  const { stock, item, handlesetOpen } = props;
+  const [itemNumber, setItemNumber] = useState(item.quantity);
+
   const history = useHistory();
-  const handleIncrement = () => {
-    itemNumber < stock && setItemNumber(itemNumber + 1);
+  const handleIncrement = (item_id) => {
+    try {
+      props.setLoading(true);
+      itemNumber < stock && setItemNumber(itemNumber + 1);
+      itemNumber &&
+        commerce.cart
+          .update(item_id, { quantity: itemNumber + 1 })
+          .then((response) => {
+            props.setLoading(false);
+            handlesetOpen(true, " your shopping cart has been updated");
+            Dispatch(FETCH_CART_SUCCESS({ cart: response.cart }));
+          });
+    } catch (err) {
+      console.log(err);
+      props.setLoading(false);
+    }
   };
-  const handleDecrement = () => {
-    itemNumber && setItemNumber(itemNumber - 1);
+  const handleDecrement = (item_id) => {
+    props.setLoading(true);
+    try {
+      itemNumber && setItemNumber(itemNumber - 1);
+      itemNumber &&
+        commerce.cart
+          .update(item_id, { quantity: itemNumber - 1 })
+          .then((response) => {
+            props.setLoading(false);
+            handlesetOpen(true, "item(s) was removed from cart");
+            Dispatch(FETCH_CART_SUCCESS({ cart: response.cart }));
+          });
+    } catch (err) {
+      console.log(err);
+      props.setLoading(false);
+    }
   };
-  const handleClick = () => {
-    history.push("/item_Detail");
+  const handleClick = (item) => {
+    history.push({ pathname: "/item_Detail", state: item });
+  };
+  const handleDelete = (id) => {
+    props.setLoading(true);
+    try {
+      commerce.cart.remove(id).then((response) => {
+        props.setLoading(false);
+        handlesetOpen(true, "item(s) was removed from cart");
+        Dispatch(FETCH_CART_SUCCESS({ cart: response.cart }));
+      });
+    } catch (err) {
+      console.log(err);
+      props.setLoading(false);
+    }
   };
   const ImageDetail = {
     height: "80px",
   };
+  useEffect(() => console.log(props));
+
   return (
     <ProductContainer>
-      <Productsection>
-        <img src="/shirt.jpg" style={ImageDetail} alt="pic" />
-        <div style={{ width: "70%" }} onClick={handleClick.bind(this, "")}>
-          <HeaderText2>Mens Mopi Shirts</HeaderText2>
-          <MediumText>
-            Also entitled to free returns if products dont match
-          </MediumText>
-          <MediumText> available stock:{stock}</MediumText>
-          <HeaderText2>Price: =N=17.98</HeaderText2>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100px",
-            width: "20%",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <DeleteForeverIcon
-            style={{ color: "grey", cursor: "pointer" }}
-            fontSize="large"
-          />
+      {item ? (
+        <Productsection>
+          <img src={item["media"]["source"]} style={ImageDetail} alt="pic" />
+          <div style={{ width: "50%" }} onClick={handleClick.bind(this, item)}>
+            <HeaderText2>{item.name.slice(0, 100)}...</HeaderText2>
+            <MediumText>
+              Also entitled to free returns if products dont match
+            </MediumText>
+            {/* <MediumText> available stock:{stock}</MediumText> */}
+            <HeaderText2>
+              Price: {item.price["formatted_with_symbol"]}
+            </HeaderText2>
+          </div>
           <div
             style={{
-              justifySelf: "flex-end",
               display: "flex",
-              flexDirection: "row",
-
-              width: "60px",
-              alignItems: "center",
+              flexDirection: "column",
+              height: "100px",
+              width: "20%",
               justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <RemoveCircleOutlineIcon
+            <DeleteForeverIcon
+              onClick={handleDelete.bind(this, item.id)}
               style={{ color: "grey", cursor: "pointer" }}
-              fontSize="medium"
-              onClick={handleDecrement.bind(this, "")}
+              fontSize="large"
             />
-            <p style={{ color: "grey" }}>{itemNumber}</p>
-            <ControlPointIcon
-              onClick={handleIncrement.bind(this, "")}
-              style={{ color: "grey", cursor: "pointer" }}
-              fontSize="medium"
-            />
+            <div
+              style={{
+                justifySelf: "flex-end",
+                display: "flex",
+                flexDirection: "row",
+
+                width: "60px",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <RemoveCircleOutlineIcon
+                style={{ color: "grey", cursor: "pointer" }}
+                fontSize="medium"
+                onClick={handleDecrement.bind(this, item.id)}
+              />
+              <p style={{ color: "grey" }}>{itemNumber}</p>
+              <ControlPointIcon
+                onClick={handleIncrement.bind(this, item.id)}
+                style={{ color: "grey", cursor: "pointer" }}
+                fontSize="medium"
+              />
+            </div>
           </div>
-        </div>
-      </Productsection>
+        </Productsection>
+      ) : null}
     </ProductContainer>
   );
 };
-const ShoppingCart = () => {
-  const cartIsEmty = false;
+const ShoppingCart = (props) => {
+  const [cartState, setCartState] = useState([]);
+  const cart = useSelector((state) => state.cart);
+  const Dispatch = useDispatch();
+  const [open, setOpen] = useState({ status: false, message: "" });
+
   const Cardimg = {
     height: "50px",
   };
+  useEffect(() => {
+    cart.cart && console.log(cart);
+    commerce.cart
+      .retrieve()
+      .then((cart) => {
+        Dispatch(FETCH_CART_SUCCESS({ cart }));
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the cart", error);
+      });
+  }, []);
+  const handlesetOpen = (status, message) => {
+    setOpen({ ...open, status, message });
+  };
+  const ListCartItems = () => {
+    return (
+      cart.cart &&
+      cart.cart["line_items"].map((item) => {
+        return (
+          <CartPeoduct
+            setLoading={props.setLoading}
+            handlesetOpen={handlesetOpen}
+            key={item.id}
+            item={item}
+            stock={8}
+          />
+        );
+      })
+    );
+  };
+
+  function Alert(props) {
+    return <MuiAlert elevation={10} variant="filled" {...props} />;
+  }
   return (
     <Container>
-      {cartIsEmty ? (
+      <Snackbar
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "center",
+        }}
+        open={open.status}
+        autoHideDuration={6000}
+        onClose={() => {
+          handlesetOpen(false, "");
+        }}
+      >
+        <Alert
+          onClose={() => {
+            handlesetOpen(false, "");
+          }}
+          severity="success"
+        >
+          {open.message}
+        </Alert>
+      </Snackbar>
+      {!cart.cart || !cart.cart["line_items"].length ? (
         <EmptyCart>
           <ShoppingCartOutlinedIcon
             fontSize="large"
@@ -217,17 +330,23 @@ const ShoppingCart = () => {
           />
           <HeaderText2>Your Shopping Cart is empty :)</HeaderText2>
           <div style={{ height: "100px" }}></div>
-          <MoreToLove />
+          <MoreToLove title="Many More To Explore" Description="" />
         </EmptyCart>
       ) : (
         <React.Fragment>
           <CartSection>
             <Header>
-              <HeaderText>Shoping cart - 2 items</HeaderText>
+              <HeaderText>
+                Shoping cart - ({cart.cart["total_items"]}) items
+              </HeaderText>
+              <MediumText>
+                ({cart.cart["total_unique_items"]}) products
+              </MediumText>
             </Header>
-            <CartPeoduct stock={8} />
+            {/* <CartPeoduct stock={8} />
             <CartPeoduct stock={2} />
-            <CartPeoduct stock={5} />
+            <CartPeoduct stock={5} /> */}
+            {ListCartItems()}
             <PaymentChanels>
               <HeaderText2>Accepted Payment Channels</HeaderText2>
               <Cards>
@@ -251,9 +370,13 @@ const ShoppingCart = () => {
                 <HeaderText>total</HeaderText>
               </div>
               <div>
-                <MediumText>=N= 29.90</MediumText>
-                <MediumText>=N= 29.90</MediumText>
-                <HeaderText>=N= 29.90</HeaderText>
+                <MediumText>
+                  {cart.cart["subtotal"]["formatted_with_symbol"]}
+                </MediumText>
+                <MediumText>$00.00</MediumText>
+                <HeaderText>
+                  {cart.cart["subtotal"]["formatted_with_symbol"]}
+                </HeaderText>
               </div>
             </SummeryItems>
 
@@ -265,4 +388,4 @@ const ShoppingCart = () => {
   );
 };
 
-export default ShoppingCart;
+export default WithSpinner(ShoppingCart);
