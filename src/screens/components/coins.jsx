@@ -3,6 +3,7 @@ import styled from "styled-components";
 import StarIcon from "@material-ui/icons/Star";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import FlashOnIcon from "@material-ui/icons/FlashOn";
+import { useHistory } from "react-router-dom";
 const CoinsContainer = styled.div`
   //   width: 90px;
   //   min-height: 100px;
@@ -43,7 +44,7 @@ const CircleItem = styled.div`
 const CoinsCard = (props) => {
   const { Icon, Color, Name } = props;
   return (
-    <CoinsContainer>
+    <CoinsContainer onClick={props.onClick}>
       <CircleItem Color={Color}>
         <Icon fontSize="large" style={{ color: "white" }} />
       </CircleItem>
@@ -53,18 +54,75 @@ const CoinsCard = (props) => {
 };
 
 const CoinsDeals = () => {
+  const history = useHistory();
+  function handleClick(dealname, deal_id) {
+    history.push({
+      pathname: "base_page",
+      state: { deal_id: deal_id.length ? deal_id : null, dealname: dealname },
+    });
+  }
   return (
     <Container>
-      <CoinsCard Icon={StarIcon} Color="orange" Name="Coins" />
-      <CoinsCard Icon={CardGiftcardIcon} Color="blue" Name="Freebies" />
-      <CoinsCard Icon={StarIcon} Color="yellow" Name="Splash It" />
-      <CoinsCard Icon={CardGiftcardIcon} Color="purple" Name="Coupons" />
-      <CoinsCard Icon={StarIcon} Color="orange" Name="New Arrivals" />
-      <CoinsCard Icon={FlashOnIcon} Color="green" Name="Flash Deals" />
-      <CoinsCard Icon={StarIcon} Color="yellow" Name="Splash It" />
-      <CoinsCard Icon={CardGiftcardIcon} Color="purple" Name="Coupons" />
-      <CoinsCard Icon={StarIcon} Color="orange" Name="New Arrivals" />
-      <CoinsCard Icon={FlashOnIcon} Color="green" Name="Flash Deals" />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Coins")}
+        Icon={StarIcon}
+        Color="orange"
+        Name="Coins"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Freebies")}
+        Icon={CardGiftcardIcon}
+        Color="blue"
+        Name="Freebies"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Splash It")}
+        Icon={StarIcon}
+        Color="yellow"
+        Name="Splash It"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Coupons")}
+        Icon={CardGiftcardIcon}
+        Color="purple"
+        Name="Coupons"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "New Arrivals", "New Arrivals")}
+        Icon={StarIcon}
+        Color="orange"
+        Name="New Arrivals"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Flash Deals", "Flash Deals")}
+        Icon={FlashOnIcon}
+        Color="green"
+        Name="Flash Deals"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Splash It")}
+        Icon={StarIcon}
+        Color="yellow"
+        Name="Splash It"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "Coupons")}
+        Icon={CardGiftcardIcon}
+        Color="purple"
+        Name="Coupons"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "New Arrivals", "New Arrivals")}
+        Icon={StarIcon}
+        Color="orange"
+        Name="New Arrivals"
+      />
+      <CoinsCard
+        onClick={handleClick.bind(this, "TopDeals", "TopDeals")}
+        Icon={FlashOnIcon}
+        Color="green"
+        Name="Top Deals"
+      />
     </Container>
   );
 };

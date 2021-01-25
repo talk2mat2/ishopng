@@ -110,7 +110,6 @@ const Swipper = () => {
 
   useEffect(() => {
     getHeaderswiperItems(products);
-    console.log("how far");
   }, [products]);
 
   return (

@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { FETCH_CART_SUCCESS } from "../redux/action";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import WithSpinner from "./components/withSpinner";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -116,6 +117,7 @@ const ProductDetail = (props) => {
   const [open, setOpen] = useState({ status: false, message: "" });
 
   useEffect(() => {
+    console.log(props);
     history.location.state
       ? setState(history.location.state)
       : history.push("/");
@@ -127,15 +129,18 @@ const ProductDetail = (props) => {
   };
 
   function handleAddToCart(productId, quantity) {
+    props.setLoading(true);
     commerce.cart
       .add(productId, quantity)
       .then((item) => {
         console.log(item.cart);
+        props.setLoading(false);
         handlesetOpen(true, "this item was added to cart");
         dispatch(FETCH_CART_SUCCESS({ cart: item.cart }));
         // this.setState({ cart: item.cart });
       })
       .catch((error) => {
+        props.setLoading(false);
         console.error("There was an error adding the item to the cart", error);
       });
   }
@@ -185,9 +190,9 @@ const ProductDetail = (props) => {
           <MediuText>
             Also entitled to ishop free returns if products dont match
           </MediuText>
-          <HeaderText>
+          {/* <HeaderText>
             <MediuText>fits:</MediuText>Adults
-          </HeaderText>
+          </HeaderText> */}
           <MediuText>
             Available Stock: {state["quantity"] && state["quantity"]}
           </MediuText>
@@ -301,4 +306,4 @@ const ProductDetail = (props) => {
   );
 };
 
-export default ProductDetail;
+export default WithSpinner(ProductDetail);

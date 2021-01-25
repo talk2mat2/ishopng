@@ -84,7 +84,14 @@ const CircleItem = styled.div`
 `;
 
 const DealsSwiper = (props) => {
-  const { dealname, dealDescription, Icon, Color, product_deals } = props;
+  const {
+    dealname,
+    dealDescription,
+    Icon,
+    Color,
+    product_deals,
+    deal_id,
+  } = props;
 
   const products_error = useSelector((state) => state.products.error);
   const history = useHistory();
@@ -101,7 +108,7 @@ const DealsSwiper = (props) => {
   const ListSlides = () => (
     <>
       <SwiperSlide style={slideSWiper}>
-        {product_deals.slice(0, 5).map((items, index) => (
+        {product_deals.slice(0, 5).map((items) => (
           <CardProductLanding
             key={items.id}
             onClick={handleClick.bind(this, items)}
@@ -160,6 +167,12 @@ const DealsSwiper = (props) => {
             fontSize: "small",
             color: "grey",
             cursor: "pointer",
+          }}
+          onClick={() => {
+            history.push({
+              pathname: "base_page",
+              state: { deal_id, dealname },
+            });
           }}
         >
           see details

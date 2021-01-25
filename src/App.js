@@ -33,6 +33,7 @@ import ScrollToTop from './ScrollToTop';
 import CoinsDeals from './screens/components/coins';
 import styled from "styled-components"
 import { Button } from '@material-ui/core';
+import BasePage from './screens/base.page';
 
 
 const CoinsSection=styled.div`
@@ -90,10 +91,10 @@ useEffect(()=>{
   <CoinsSection><CoinsDeals/></CoinsSection>
   <Swipper />
 
-  <DealsSwiper product_deals={NewArrivals} dealname="New Arrivals" dealDescription="latest in the block" Icon={StarIcon} Color="blue"/>
-    <DealsSwiper product_deals={flashDealsItems} dealname="Flash Deals" dealDescription="trending  " Icon={FlashOnIcon} Color="green"/>
+  <DealsSwiper product_deals={NewArrivals} deal_id="New Arrivals"  dealname="New Arrivals" dealDescription="latest in the block" Icon={StarIcon} Color="blue"/>
+    <DealsSwiper product_deals={flashDealsItems} deal_id="Flash Deals"  dealname="Flash Deals" dealDescription="trending  " Icon={FlashOnIcon} Color="green"/>
   <FlashDeals/>
-  <DealsSwiper product_deals={TopDeals}  dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
+  <DealsSwiper product_deals={TopDeals} deal_id="TopDeals"  dealname="Top Deals" dealDescription="you will love these" Icon={CardGiftcardIcon} Color="orange"/>
  
   <RecentlyViewed/> 
  
@@ -105,7 +106,7 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
 const[loading,setLoading]= useState(false)
 const Dispatch=useDispatch()
-
+const products = useSelector((state) => state.products&&state.products["products"]);
 useEffect(()=>{
   function fetchProducts() {
     commerce.products.list().then((products) => {
@@ -125,7 +126,8 @@ useEffect(()=>{
       Dispatch(LIST_PRODUCTS_ERROR());
     });
   }
-  fetchProducts()
+  // fetchProducts()
+  !products.length && fetchProducts();
 },[])
 
 useEffect(()=>{
@@ -170,7 +172,12 @@ CheckAuth()
       <Navbar  />
       < Switch>
       <Route  exact path="/">
+     
 <Landing/>
+ </Route>
+      <Route  exact path="/base_page">
+       <BasePage/>
+
  </Route>
 
  <Route path="/signin"  render={(props)=>!currentUser?<LoginScreen loading={loading} setLoading={setLoading} {...props} />:<Landing {...props} />}/>
@@ -185,7 +192,7 @@ CheckAuth()
  <ShoppingCart loading={loading} setLoading={setLoading} />
  </Route>
  <Route path="/item_Detail" >
-  <ProductDetail/>
+  <ProductDetail loading={loading} setLoading={setLoading}/>
  </Route>
  </Switch>
  <NiceFooter/> 

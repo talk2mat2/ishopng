@@ -196,7 +196,7 @@ const CartPeoduct = (props) => {
   const ImageDetail = {
     height: "80px",
   };
-  useEffect(() => console.log(props));
+  // useEffect(() => console.log(props));
 
   return (
     <ProductContainer>

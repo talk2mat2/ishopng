@@ -55,9 +55,7 @@ const Navbar = (props) => {
     setMenuvisible(!Menuvisible);
   };
   const history = useHistory();
-  const handleHome = () => {
-    !products.length && history.go(0);
-  };
+  const handleHome = () => {};
 
   return (
     <div className="nav">
@@ -212,10 +210,15 @@ const Navbar = (props) => {
             <ArrowDropDownOutlinedIcon style={{ color: "white" }} />
           </div>
           <div id="orders-section">
-            <h3>returns</h3>
-            <h3>& Orders</h3>
+            <h3>my</h3>
+            <h3>Orders</h3>
           </div>
-          <div>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push("/cart");
+            }}
+          >
             <div
               style={{
                 borderRadius: "100%",
@@ -242,10 +245,7 @@ const Navbar = (props) => {
             </div>
             <h3>
               <ShoppingCartOutlinedIcon
-                onClick={() => {
-                  history.push("/cart");
-                }}
-                style={{ color: " white", cursor: "pointer" }}
+                style={{ color: " white" }}
                 fontSize="large"
               />
             </h3>
