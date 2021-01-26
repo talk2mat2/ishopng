@@ -1,7 +1,8 @@
 import { createStore,combineReducers } from 'redux'
-import{ UserReducers,productReducer,cartReducer} from './reducer'
+import{ UserReducers,productReducer,cartReducer,RecentViewdItemRedcer} from './reducer'
 
-const rootReducer=combineReducers({user:UserReducers,products:productReducer,cart:cartReducer})
+const rootReducer=combineReducers({user:UserReducers,products:productReducer,
+    cart:cartReducer,viewdItems:RecentViewdItemRedcer})
 
 
 

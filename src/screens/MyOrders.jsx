@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import SweetButtons from "./components/SweetButtons";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import ControlPointIcon from "@material-ui/icons/ControlPoint";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+
 import MoreToLove from "./components/MoreToLove";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import WarningIcon from "@material-ui/icons/Warning";
+
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { FETCH_CART_SUCCESS } from "../redux/action";
@@ -42,18 +40,7 @@ const Header = styled.div`
   }
 }
 `;
-const PaymentChanels = styled.div`
-  height: 180px;
-  width: 800px;
-  border-radius: 10px;
-  background-color: white;
-  padding: 10px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  @media (max-width: 768px) {
-    width: 95vw;
-  }
-`;
+
 const EmptyCart = styled.div`
   min-height: 80vh;
   width: 98%;
@@ -102,8 +89,10 @@ const MediumText = styled.p`
 `;
 const ProductContainer = styled.div`
   min-height: 150px;
+  padding: 6px;
   width: 800px;
-  border-radius: 10px;
+  box-sizing: border-box;
+  :border-radius: 10px;
   background-color: white;
   flex-direction: column;
   justify-content: center;
@@ -115,6 +104,7 @@ const ProductContainer = styled.div`
 `;
 const Productsection = styled.div`
   min-height: 80%;
+  margin-top: 8px;
   width: 99%;
   display: flex;
   flex-direction: row;
@@ -143,56 +133,11 @@ const CartPeoduct = (props) => {
   const [itemNumber, setItemNumber] = useState(item.quantity);
 
   const history = useHistory();
-  const handleIncrement = (item_id) => {
-    try {
-      props.setLoading(true);
-      itemNumber < stock && setItemNumber(itemNumber + 1);
-      itemNumber &&
-        commerce.cart
-          .update(item_id, { quantity: itemNumber + 1 })
-          .then((response) => {
-            props.setLoading(false);
-            handlesetOpen(true, " your shopping cart has been updated");
-            Dispatch(FETCH_CART_SUCCESS({ cart: response.cart }));
-          });
-    } catch (err) {
-      console.log(err);
-      props.setLoading(false);
-    }
-  };
-  const handleDecrement = (item_id) => {
-    props.setLoading(true);
-    try {
-      itemNumber && setItemNumber(itemNumber - 1);
-      itemNumber &&
-        commerce.cart
-          .update(item_id, { quantity: itemNumber - 1 })
-          .then((response) => {
-            props.setLoading(false);
-            handlesetOpen(true, "item(s) was removed from cart");
-            Dispatch(FETCH_CART_SUCCESS({ cart: response.cart }));
-          });
-    } catch (err) {
-      console.log(err);
-      props.setLoading(false);
-    }
-  };
+
   const handleClick = (item) => {
     history.push({ pathname: "/item_Detail", state: item });
   };
-  const handleDelete = (id) => {
-    props.setLoading(true);
-    try {
-      commerce.cart.remove(id).then((response) => {
-        props.setLoading(false);
-        handlesetOpen(true, "item(s) was removed from cart");
-        Dispatch(FETCH_CART_SUCCESS({ cart: response.cart }));
-      });
-    } catch (err) {
-      console.log(err);
-      props.setLoading(false);
-    }
-  };
+
   const ImageDetail = {
     height: "80px",
   };
@@ -200,6 +145,8 @@ const CartPeoduct = (props) => {
 
   return (
     <ProductContainer>
+      <MediumText> order id:812423839932434908 </MediumText>
+      <MediumText> order time:17:48 Jan. 11 2021 </MediumText>
       {item ? (
         <Productsection>
           <img src={item["media"]["source"]} style={ImageDetail} alt="pic" />
@@ -208,56 +155,18 @@ const CartPeoduct = (props) => {
             <MediumText>
               Also entitled to free returns if products dont match
             </MediumText>
-            {/* <MediumText> available stock:{stock}</MediumText> */}
-            <HeaderText2>
-              Price: {item.price["formatted_with_symbol"]}
-            </HeaderText2>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100px",
-              width: "20%",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <DeleteForeverIcon
-              onClick={handleDelete.bind(this, item.id)}
-              style={{ color: "grey", cursor: "pointer" }}
-              fontSize="large"
-            />
-            <div
-              style={{
-                justifySelf: "flex-end",
-                display: "flex",
-                flexDirection: "row",
 
-                width: "60px",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <RemoveCircleOutlineIcon
-                style={{ color: "grey", cursor: "pointer" }}
-                fontSize="medium"
-                onClick={handleDecrement.bind(this, item.id)}
-              />
-              <p style={{ color: "grey" }}>{itemNumber}</p>
-              <ControlPointIcon
-                onClick={handleIncrement.bind(this, item.id)}
-                style={{ color: "grey", cursor: "pointer" }}
-                fontSize="medium"
-              />
-            </div>
-          </div>
+          <HeaderText2>
+            Price: {item.price["formatted_with_symbol"]}
+          </HeaderText2>
         </Productsection>
       ) : null}
+      <MediumText>status : {"awaiting delivery"}</MediumText>
     </ProductContainer>
   );
 };
-const ShoppingCart = (props) => {
+const MyOrders = (props) => {
   // const [cartState, setCartState] = useState([]);
   const cart = useSelector((state) => state.cart);
   const Dispatch = useDispatch();
@@ -290,7 +199,7 @@ const ShoppingCart = (props) => {
             handlesetOpen={handlesetOpen}
             key={item.id}
             item={item}
-            stock={8}
+            stock={item.quantity}
           />
         );
       })
@@ -324,11 +233,11 @@ const ShoppingCart = (props) => {
       </Snackbar>
       {!cart.cart || !cart.cart["line_items"].length ? (
         <EmptyCart>
-          <ShoppingCartOutlinedIcon
+          <WarningIcon
             fontSize="large"
             style={{ color: "grey", fontSize: "90px" }}
           />
-          <HeaderText2>Your Shopping Cart is empty :)</HeaderText2>
+          <HeaderText2>no orders yet</HeaderText2>
           <div style={{ height: "100px" }}></div>
           <MoreToLove title="Many More To Explore" Description="" />
         </EmptyCart>
@@ -337,55 +246,22 @@ const ShoppingCart = (props) => {
           <CartSection>
             <Header>
               <HeaderText>
-                Shoping cart - ({cart.cart["total_items"]}) items
+                My Orders -{/* ({cart.cart["total_items"]}) items */}
               </HeaderText>
-              <MediumText>
-                ({cart.cart["total_unique_items"]}) products
-              </MediumText>
             </Header>
             {/* <CartPeoduct stock={8} />
             <CartPeoduct stock={2} />
             <CartPeoduct stock={5} /> */}
             {ListCartItems()}
-            <PaymentChanels>
-              <HeaderText2>Accepted Payment Channels</HeaderText2>
-              <Cards>
-                <img src="/Quickteller.png" alt="quickteller" style={Cardimg} />
-                <img src="/paystack.png" alt="quickteller" style={Cardimg} />
-                <img src="/Visa.png" alt="quickteller" style={Cardimg} />
-                <img src="/Mastercard.png" alt="quickteller" style={Cardimg} />
-              </Cards>
-            </PaymentChanels>
+
             {/* <div style={{ width: " 800px" }}>
               <MoreToLove />
             </div> */}
           </CartSection>
-          <Summery>
-            <HeaderText>Order Summary</HeaderText>
-            <SummeryItems>
-              <div>
-                <MediumText>Subtotal</MediumText>
-                <MediumText>Shipping</MediumText>
-
-                <HeaderText>total</HeaderText>
-              </div>
-              <div>
-                <MediumText>
-                  {cart.cart["subtotal"]["formatted_with_symbol"]}
-                </MediumText>
-                <MediumText>$00.00</MediumText>
-                <HeaderText>
-                  {cart.cart["subtotal"]["formatted_with_symbol"]}
-                </HeaderText>
-              </div>
-            </SummeryItems>
-
-            <SweetButtons height="40px" name="Check Out Now"></SweetButtons>
-          </Summery>
         </React.Fragment>
       )}
     </Container>
   );
 };
 
-export default WithSpinner(ShoppingCart);
+export default WithSpinner(MyOrders);

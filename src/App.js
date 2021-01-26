@@ -32,8 +32,9 @@ import RegisterUser from './screens/register.user';
 import ScrollToTop from './ScrollToTop';
 import CoinsDeals from './screens/components/coins';
 import styled from "styled-components"
-import { Button } from '@material-ui/core';
+
 import BasePage from './screens/base.page';
+import MyOrders from './screens/MyOrders';
 
 
 const CoinsSection=styled.div`
@@ -47,7 +48,7 @@ function Landing(){
   const [flashDealsItems,setFlashDealsItems]=useState([])
   const [NewArrivals,setNewArrivals]=useState([])
   const [TopDeals, setTopDeals]=useState([])
-  const Dispatch=useDispatch()
+  // const Dispatch=useDispatch()
 
 
 const getfLashDealsItems = (products) => {
@@ -177,6 +178,10 @@ CheckAuth()
  </Route>
       <Route  exact path="/base_page">
        <BasePage/>
+
+ </Route>
+      <Route  exact path="/MyOrders">
+       <MyOrders/>
 
  </Route>
 

@@ -195,19 +195,17 @@ const BasePage = (props) => {
     });
   };
   const ListItems = () => {
-    return DealsItems ? (
-      DealsItems.map((items) => (
-        <CardProductLanding
-          key={items.id}
-          onClick={handleClick.bind(this, items)}
-          imagesrc={items["media"]["source"]}
-          description={items.name}
-          price={items["price"]["formatted_with_symbol"]}
-        />
-      ))
-    ) : (
-      <ProductContainer>jjjjj</ProductContainer>
-    );
+    return DealsItems
+      ? DealsItems.map((items) => (
+          <CardProductLanding
+            key={items.id}
+            onClick={handleClick.bind(this, items)}
+            imagesrc={items["media"]["source"]}
+            description={items.name}
+            price={items["price"]["formatted_with_symbol"]}
+          />
+        ))
+      : null;
   };
 
   return (

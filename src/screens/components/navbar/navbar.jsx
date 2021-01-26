@@ -56,6 +56,12 @@ const Navbar = (props) => {
   };
   const history = useHistory();
   const handleHome = () => {};
+  function handleClick(dealname, deal_id) {
+    history.push({
+      pathname: "base_page",
+      state: { deal_id: deal_id.length ? deal_id : null, dealname: dealname },
+    });
+  }
 
   return (
     <div className="nav">
@@ -209,10 +215,18 @@ const Navbar = (props) => {
             )}
             <ArrowDropDownOutlinedIcon style={{ color: "white" }} />
           </div>
-          <div id="orders-section">
+
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push("/MyOrders");
+            }}
+            id="orders-section"
+          >
             <h3>my</h3>
             <h3>Orders</h3>
           </div>
+
           <div
             style={{ cursor: "pointer" }}
             onClick={() => {
@@ -270,12 +284,58 @@ const Navbar = (props) => {
           <h4 style={{ fontWeight: "bold" }}>All</h4>
         </div>
         <div id="deals">
-          <p id="deals-responsive3">last Minute </p>
-          <p id="deals-responsive3">Gift cards and top-ups</p>
-          <p id="deals-responsive2">best sellers</p>
-          <p id="deals-responsive1">Gift cards and top-ups</p>
-          <p id="deals-responsive1">last Minute Deals</p>
-          <p id="deals-responsive2">Gift cards and top-ups</p>
+          <p
+            onClick={handleClick.bind(this, "last Minute", "last Minute")}
+            id="deals-responsive3"
+          >
+            last Minute{" "}
+          </p>
+          <p
+            onClick={handleClick.bind(
+              this,
+              "Gift cards and top-up",
+              "Gift cards and top-up"
+            )}
+            id="deals-responsive3"
+          >
+            Gift cards and top-ups
+          </p>
+          <p
+            onClick={handleClick.bind(this, "best sellers", "best sellers")}
+            id="deals-responsive2"
+          >
+            best sellers
+          </p>
+          <p
+            onClick={handleClick.bind(
+              this,
+              "Gift cards and top-ups",
+              "Gift cards and top-ups"
+            )}
+            id="deals-responsive1"
+          >
+            Gift cards and top-ups
+          </p>
+          <p
+            onClick={handleClick.bind(
+              this,
+              "last Minute Deals",
+              "last Minute Deals"
+            )}
+            id="deals-responsive1"
+          >
+            last Minute Deals
+          </p>
+          <p
+            onClick={handleClick.bind(
+              this,
+              "Gift cards and top-ups",
+              "Gift cards and top-ups"
+            )}
+            id="deals-responsive2"
+          >
+            Gift cards and top-ups
+          </p>
           <div id="offer">
             <h3 style={{ fontSize: 19, fontWeight: "bold" }}>
               ishop offer|23 days free trial

@@ -9,7 +9,7 @@ import CustomersReview from "./components/CustomerRatings";
 import { useHistory } from "react-router-dom";
 import { commerce } from "../libs/commerce";
 import { useDispatch } from "react-redux";
-import { FETCH_CART_SUCCESS } from "../redux/action";
+import { FETCH_CART_SUCCESS, ADD_RECENTVIEWD_ITEM } from "../redux/action";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import WithSpinner from "./components/withSpinner";
@@ -122,6 +122,8 @@ const ProductDetail = (props) => {
       ? setState(history.location.state)
       : history.push("/");
     console.log(history.location.state);
+    history.location.state &&
+      dispatch(ADD_RECENTVIEWD_ITEM(history.location.state));
   }, [history.location.state, history]);
 
   const handlesetOpen = (status, message) => {

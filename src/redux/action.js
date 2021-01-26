@@ -16,3 +16,8 @@ export const  FETCH_CART_SUCCESS=(cart)=>{
     return{type: Action_types.FETCH_CART_SUCCESS,
     payload:cart}
 }
+export const  ADD_RECENTVIEWD_ITEM=(item)=>{
+    console.log("action is",item)
+    return{type: Action_types.ADD_RECENTVIEWD_ITEM,
+    payload:item}
+}

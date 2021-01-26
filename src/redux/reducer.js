@@ -28,4 +28,13 @@ export const cartReducer=(state=cart_init_state,action)=>{
 else{return state}
 }
 
+const RecentViewd=[]
+export const RecentViewdItemRedcer=(state=RecentViewd,action)=>{
+  if(action.type===Action_types.ADD_RECENTVIEWD_ITEM){
+    if(state.length>4){ state.pop()
+    return[action.payload,...state]}
+    else{ return[action.payload,...state]}
+}
+else{return state} 
 
+}

@@ -95,6 +95,7 @@ const DealsSwiper = (props) => {
 
   const products_error = useSelector((state) => state.products.error);
   const history = useHistory();
+
   const handleClick = (items) => {
     history.push({
       pathname: "/item_Detail",

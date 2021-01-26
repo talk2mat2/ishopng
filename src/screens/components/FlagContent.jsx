@@ -24,8 +24,8 @@ const H3 = styled.h3`
 const FLagContent = () => {
   return (
     <Div>
-      <H3>NIGERIA</H3>
-      <P>you are shopping with nigerian -NGR- NGN</P>
+      <H3>USA</H3>
+      <P>you are shopping with -USD- $</P>
       <P>happy shopping on our platform :)</P>
     </Div>
   );

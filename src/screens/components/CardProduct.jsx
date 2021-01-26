@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
+  cursor: pointer;
   width: 100px;
   height: 150px;
   background-color: #ffff;
@@ -41,7 +42,7 @@ const P = styled.p`
 
 export const CardProduct = (props) => {
   return (
-    <Div>
+    <Div onClick={props.onClick}>
       <ImgDiv>
         <img
           src={props.imagesrc}
@@ -52,7 +53,7 @@ export const CardProduct = (props) => {
           alt="img"
         />
       </ImgDiv>
-      <P>{props.description}</P>
+      <P>{props.description && props.description.slice(0, 15)}...</P>
       <P>{props.price}</P>
     </Div>
   );
